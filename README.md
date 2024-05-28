@@ -2,7 +2,7 @@
 This is a single api for multiple micro services. Users Service, Orders Service, Ingradients Service, Recipes Service and Cart Service.
 
 # DB Setup
-Download the latest dociker image for ms sql server 2019
+Download the latest docker image for ms sql server 2019
 1. Run below command to download the docker image.
 	docker pull mcr.microsoft.com/mssql/server:2019-latest
 2. Run following command in docket to run the sql server
