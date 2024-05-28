@@ -1,6 +1,12 @@
 # Introduction
 This is a single api for multiple micro services. Users Service, Orders Service, Ingradients Service, Recipes Service and Cart Service.
 
+# Technology
+1. .Net core 8
+2. EF Core 8
+3. CQRS Design Pattern
+4. Repository Pattern
+
 # DB Setup
 Download the latest docker image for ms sql server 2019
 1. Run below command to download the docker image.
