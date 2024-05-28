@@ -6,6 +6,8 @@ This is a single api for multiple micro services. Users Service, Orders Service,
 2. EF Core 8
 3. CQRS Design Pattern
 4. Repository Pattern
+5. Docker
+6. Github 
 
 # DB Setup
 Download the latest docker image for ms sql server 2019
