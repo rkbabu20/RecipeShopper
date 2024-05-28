@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Commands\Ingradients\" />
+    <Folder Include="Commands\Cart\" />
+    <Folder Include="Commands\Login\" />
+    <Folder Include="Commands\Orders\" />
+    <Folder Include="Commands\Users\" />
+  </ItemGroup>
+
+</Project>
