@@ -1,11 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using RecipeShopper.Api.Controllers.Base;
 using RecipeShopper.Api.Controllers.Requests;
+using RecipeShopper.CommandQuery.Quaries.Users;
 
 namespace RecipeShopper.Api.Controllers
 {
     public class UserController : BaseController
     {
+        private readonly IMediator _mediator = null;
+        private readonly IMapper _mapper = null;
+        public UserController(IMediator mediator,IMapper mapper)
+        {
+            _mediator = mediator;
+            _mapper = mapper;
+        }
+
         /// <summary>
         /// Get all users
         /// </summary>
@@ -14,7 +25,7 @@ namespace RecipeShopper.Api.Controllers
         public async Task<IActionResult> GetAllUsers()
         {
             // Write logic to return all users
-            var result = new { IsSuucess = "true", Message = "Get all users" };
+            var result = await _mediator.Send(new GetAllUsersQuery());
             return Ok(result);
         }
 

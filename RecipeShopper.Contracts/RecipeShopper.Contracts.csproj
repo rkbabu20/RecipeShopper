@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RecipeShopper.Domain\RecipeShopper.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
