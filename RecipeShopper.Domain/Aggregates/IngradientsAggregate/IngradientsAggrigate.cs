@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RecipeShopper.Domain.Aggregates.IngradientsAggregate
 {
-    internal class IngradientsAggrigate
+    public class IngradientsAggrigate
     {
     }
 }

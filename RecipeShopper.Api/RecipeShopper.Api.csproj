@@ -10,6 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.5">
       <PrivateAssets>all</PrivateAssets>
@@ -25,8 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RecipeShopper.CommandQuery\RecipeShopper.CommandQuery.csproj" />
     <ProjectReference Include="..\RecipeShopper.Data\RecipeShopper.Data.csproj" />
-    <ProjectReference Include="..\RecipeShopper.Domain\RecipeShopper.Domain.csproj" />
   </ItemGroup>
 
 </Project>

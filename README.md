@@ -9,6 +9,11 @@ This is a single api for multiple micro services. Users Service, Orders Service,
 5. Docker
 6. Github 
 
+# nuget packages used
+1. Microsoft.EntityFramework.Core
+2. MediatR
+3. AutoMapper
+
 # DB Setup
 Download the latest docker image for ms sql server 2019
 1. Run below command to download the docker image.

@@ -34,19 +34,6 @@ namespace RecipeShopper.Api.Controllers
         }
 
         /// <summary>
-        /// Delete ingradient from cart
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        [HttpDelete("{userId}/{ingradientid}/ingradient")]
-        public async Task<IActionResult> DeleteIngradient([FromRoute] string userId, [FromRoute] string ingradientId)
-        {
-            // Delete the cart from DB
-            var result = new { IsSuucess = "true", Message = "Ingradient deleted from user cart" };
-            return Ok(result);
-        }
-
-        /// <summary>
         /// Add ingradients to cart
         /// </summary>
         /// <param name="request"></param>

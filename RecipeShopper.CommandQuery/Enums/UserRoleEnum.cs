@@ -1,4 +1,4 @@
-﻿namespace RecipeShopper.Domain.Enums
+﻿namespace RecipeShopper.CommandQuery.Enums
 {
     /// <summary>
     /// User role
@@ -8,5 +8,5 @@
         Unspecified,
         Admin,
         User
-    }
+    };
 }

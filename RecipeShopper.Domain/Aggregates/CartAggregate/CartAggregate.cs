@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RecipeShopper.Domain.Aggregates.CartAggregate
 {
-    internal class CartAggregate
+    public class CartAggregate
     {
     }
 }

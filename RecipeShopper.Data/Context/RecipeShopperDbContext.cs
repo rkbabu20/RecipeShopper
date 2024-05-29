@@ -1,12 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using RecipeShopper.Domain.Entities;
 
 namespace RecipeShopper.Data.Context
 {
-    internal class RecipeShopperDbContext
+    public class RecipeShopperDbContext : DbContext
     {
+        public RecipeShopperDbContext(DbContextOptions<RecipeShopperDbContext> options) : base(options) 
+        { 
+        }
+
+        public virtual DbSet<User> User { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
+
     }
 }

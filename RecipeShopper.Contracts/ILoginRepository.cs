@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RecipeShopper.Domain.Aggregates.OrdersAggrigate
+namespace RecipeShopper.Contracts
 {
-    public class OrdersAggregate
+    public interface ILoginRepository
     {
+
     }
 }

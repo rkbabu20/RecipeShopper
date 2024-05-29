@@ -8,7 +8,9 @@ namespace RecipeShopper.Domain.Entities
 {
     public class Cart : DataProperties
     {
+        public string Id { get; set; }
         public User User { get; set; }
         public List<Recipe> Recipes { get; set; }
+        public bool IsOrderComplete { get; set; }
     }
 }
