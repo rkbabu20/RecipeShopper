@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace RecipeShopper.Domain.Aggregates.IngradientsAggregate
 {
+    /// <summary>
+    /// Ingradient aggregate
+    /// </summary>
     public class IngradientsAggrigate
     {
     }

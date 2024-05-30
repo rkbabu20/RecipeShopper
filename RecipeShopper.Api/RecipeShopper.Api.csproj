@@ -28,6 +28,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RecipeShopper.CommandQuery\RecipeShopper.CommandQuery.csproj" />
+    <ProjectReference Include="..\RecipeShopper.Contracts\RecipeShopper.Contracts.csproj" />
+    <ProjectReference Include="..\RecipeShopper.Data.Migrations\RecipeShopper.Data.Migrations.csproj" />
     <ProjectReference Include="..\RecipeShopper.Data\RecipeShopper.Data.csproj" />
   </ItemGroup>
 

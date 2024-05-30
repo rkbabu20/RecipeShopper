@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace RecipeShopper.Domain.Entities
 {
-    public class Order
+    /// <summary>
+    /// Order
+    /// </summary>
+    public class Order : DataProperties
     {
-        public string OrderId { get; set; }
+        /// <summary>Order id</summary>
+        public Guid OrderId { get; set; }
+        /// <summary>User</summary>
         public User User { get; set; }
+        /// <summary>Recipes</summary>
         public List<Recipe> Recipes { get; set; }
-    }
+    }// Order
 }

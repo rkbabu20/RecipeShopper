@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace RecipeShopper.Domain.Aggregates.OrdersAggrigate
 {
+    /// <summary>
+    /// Orders aggregate
+    /// </summary>
     public class OrdersAggregate
     {
     }

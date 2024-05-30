@@ -10,8 +10,16 @@ using System.Threading.Tasks;
 
 namespace RecipeShopper.Data.Registrations
 {
+    /// <summary>
+    /// Db context registration during startup
+    /// </summary>
     public static class DbContextRegistrations
     {
+        /// <summary>
+        /// Register db context
+        /// </summary>
+        /// <param name="services">Service collection</param>
+        /// <param name="configuration">Applicatoin configuration</param>
         public static void RegisterDbContext(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("SQL_DOCKER_2019");

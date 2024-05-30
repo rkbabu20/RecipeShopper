@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace RecipeShopper.Domain.Enums
 {
+    /// <summary>
+    /// Ingradient quantity type
+    /// </summary>
     public enum IngradientQuantityType
     {
         Unspecified = 0,

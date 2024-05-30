@@ -3,7 +3,9 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RecipeShopper.Api.Controllers.Base;
 using RecipeShopper.Api.Controllers.Requests;
-using RecipeShopper.CommandQuery.Quaries.Users;
+using RecipeShopper.CommandQuery.Commands.Users.DeleteUserCommand;
+using RecipeShopper.CommandQuery.Quaries.Users.AllUsersQuery;
+using RecipeShopper.CommandQuery.Quaries.Users.GetUserQuery;
 
 namespace RecipeShopper.Api.Controllers
 {
@@ -11,7 +13,7 @@ namespace RecipeShopper.Api.Controllers
     {
         private readonly IMediator _mediator = null;
         private readonly IMapper _mapper = null;
-        public UserController(IMediator mediator,IMapper mapper)
+        public UserController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
             _mapper = mapper;
@@ -24,7 +26,7 @@ namespace RecipeShopper.Api.Controllers
         [HttpGet("getall")]
         public async Task<IActionResult> GetAllUsers()
         {
-            // Write logic to return all users
+            // Query call using mediator
             var result = await _mediator.Send(new GetAllUsersQuery());
             return Ok(result);
         }
@@ -36,10 +38,16 @@ namespace RecipeShopper.Api.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpGet("{userId}")]
-        public async Task<IActionResult> Get([FromRoute]string userid)
+        public async Task<IActionResult> Get([FromRoute] string userId)
         {
             // write logic to return user for specified email
-            var result = new { IsSuucess = "true", Message = "User retrieved" };
+            Guid userIdGuid = Guid.Empty;
+            if (!Guid.TryParse(userId, out userIdGuid))
+            {
+                return BadRequest();
+            }
+            // Query call using mediator
+            var result = await _mediator.Send(new GetUserQuery(userIdGuid));
             return Ok(result);
         }
 
@@ -53,7 +61,14 @@ namespace RecipeShopper.Api.Controllers
         public async Task<IActionResult> Delete([FromRoute] string userId)
         {
             // Delete the user from DB
-            var result = new { IsSuucess = "true", Message = "User Deleted" };
+            // write logic to return user for specified email
+            Guid userIdGuid = Guid.Empty;
+            if (!Guid.TryParse(userId, out userIdGuid))
+            {
+                return BadRequest();
+            }
+            // Query call using mediator
+            var result = await _mediator.Send(new DeleteUserCommand(userIdGuid));
             return Ok(result);
         }
 

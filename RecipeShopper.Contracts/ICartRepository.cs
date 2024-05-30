@@ -1,4 +1,6 @@
-﻿using RecipeShopper.Domain.Aggregates.CartAggregate;
+﻿using RecipeShopper.Contracts.BaseContracts;
+using RecipeShopper.Domain.Aggregates;
+using RecipeShopper.Domain.Aggregates.CartAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +9,8 @@ using System.Threading.Tasks;
 
 namespace RecipeShopper.Contracts
 {
-    public interface ICartRepository
-    {
-        Task<CartAggregate> Get(string userId);
-        Task Delete(string userId);
-        Task Add(CartAggregate aggregate);
-        Task Update(CartAggregate aggregate);
-
-    }
+    /// <summary>
+    /// Cart repository interface
+    /// </summary>
+    public interface ICartRepository : IAsynRepository<GenericRequest, CartAggregate>, ICreateUpdateAsyncRepository<CartAggregate>;
 }
