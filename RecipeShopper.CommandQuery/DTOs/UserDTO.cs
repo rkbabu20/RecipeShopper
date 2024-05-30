@@ -7,8 +7,13 @@ using RecipeShopper.CommandQuery.Enums;
 
 namespace RecipeShopper.CommandQuery.DTOs
 {
+    /// <summary>
+    /// User DTO
+    /// </summary>
     public class UserDTO
     {
+        /// <summary>User Id</summary>
+        public Guid UserId { get; set; }
         /// <summary>First name</summary>
         public string? FirstName { get; set; }
         /// <summary>Last name</summary>
@@ -17,9 +22,7 @@ namespace RecipeShopper.CommandQuery.DTOs
         public string? Email { get; set; }
         /// <summary>Login password</summary>
         public string? Password { get; set; }
-        /// <summary>User Id</summary>
-        public string? UserId { get; set; }
-        /// <summary>User Id</summary>
+        /// <summary>User Role</summary>
         public UserRoleEnum Role { get; set; }
     }
 }

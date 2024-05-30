@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RecipeShopper.CommandQuery.Quaries.Users
+namespace RecipeShopper.CommandQuery.Quaries.Users.AllUsersQuery
 {
-    public class UsersResponse : BaseResponse
+    public class GetAllUsersResponse : BaseResponse
     {
-        public UsersResponse() { }
+        public GetAllUsersResponse() { }
         public List<UserDTO>? Users { get; set; }
     }
 }

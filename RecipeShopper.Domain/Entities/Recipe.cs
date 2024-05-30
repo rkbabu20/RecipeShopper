@@ -8,9 +8,11 @@ namespace RecipeShopper.Domain.Entities
 {
     public class Recipe : DataProperties
     {
-
-        public int Id { get; set; }
+        /// <summary>Recipe id</summary>
+        public Guid Id { get; set; }
+        /// <summary>Recipe name</summary>
         public string Name { get; set; }
-        public List<Ingradient> Ingredients { get; set;}
+        /// <summary>Ingradients</summary>
+        public List<Ingradient> Ingradients { get; set;}
     }
 }

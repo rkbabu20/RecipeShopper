@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace RecipeShopper.Domain.Aggregates.CartAggregate
 {
+    /// <summary>
+    /// Cart aggregate
+    /// </summary>
     public class CartAggregate
     {
     }

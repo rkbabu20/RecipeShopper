@@ -5,15 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using RecipeShopper.Domain.Aggregates;
 using RecipeShopper.Domain.Aggregates.UsersAggregate;
+using RecipeShopper.Contracts.BaseContracts;
 
 namespace RecipeShopper.Contracts
 {
-    public interface IUsersRepository
-    {
-        Task<UsersAggregate> GetAll();
-        Task<UsersAggregate> GetUser(string userId);
-        Task Add(UsersAggregate user);
-        Task Update(UsersAggregate user);
-        Task Delete(string userId);
-    }
+    /// <summary>
+    /// Interface for users repository
+    /// </summary>
+    public interface IUsersRepository : IGetAllAsync<UsersAggregate>, ICreateUpdateAsyncRepository<UsersAggregate>, IAsynRepository<GenericRequest, UsersAggregate>;
 }
