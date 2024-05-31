@@ -9,7 +9,7 @@ namespace RecipeShopper.Data
         {
             //POC logic to test db connectivity
             DataTable dt = new DataTable();
-            string connectionString = @"server=host.docker.internal,1433;User Id=sa;Password=KeltonExercise@123;database=ramdb;";
+            string connectionString = @"server=host.docker.internal,1433;User Id=sa;Password=KeltonExercise@123;database=ramdb;TrustServerCertificate=True";
             SqlConnection sqlConn = new SqlConnection(connectionString);
             SqlDataAdapter adp = new SqlDataAdapter("select * from Person", sqlConn);
             adp.Fill(dt);

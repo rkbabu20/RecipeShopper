@@ -1,4 +1,5 @@
-﻿using RecipeShopper.Domain.Entities;
+﻿using Microsoft.AspNetCore.Identity;
+using RecipeShopper.Domain.Entities;
 
 namespace RecipeShopper.Api.BootStrapper
 {
@@ -22,7 +23,7 @@ namespace RecipeShopper.Api.BootStrapper
             }
 
             // Identity api mapping
-            app.MapIdentityApi<User>();
+            app.MapIdentityApi<IdentityUser>();
 
             app.UseHttpsRedirection();
 

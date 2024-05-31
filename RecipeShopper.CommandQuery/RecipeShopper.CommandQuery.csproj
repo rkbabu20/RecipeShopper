@@ -11,6 +11,7 @@
     <Folder Include="Commands\Cart\" />
     <Folder Include="Commands\Login\" />
     <Folder Include="Commands\Orders\" />
+    <Folder Include="NewFolder\" />
   </ItemGroup>
 
   <ItemGroup>
