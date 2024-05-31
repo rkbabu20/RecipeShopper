@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
-using RecipeShopper.Contracts;
+using RecipeShopper.Data.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;

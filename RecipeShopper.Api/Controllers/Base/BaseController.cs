@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace RecipeShopper.Api.Controllers.Base
 {
@@ -6,6 +7,7 @@ namespace RecipeShopper.Api.Controllers.Base
     /// Base api controller for base
     /// </summary>
     [ApiController]
+    //[Authorize]
     [Produces("application/json")]
     [Route("[controller]")]
     public class BaseController : ControllerBase
