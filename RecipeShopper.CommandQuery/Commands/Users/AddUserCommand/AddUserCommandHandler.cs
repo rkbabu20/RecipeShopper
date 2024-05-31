@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
-using RecipeShopper.Contracts;
+using RecipeShopper.Data.Contracts;
 using RecipeShopper.Domain.Aggregates.UsersAggregate;
 using RecipeShopper.Domain.Entities;
 using System;

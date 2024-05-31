@@ -7,15 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Ingradients\" />
-    <Folder Include="Commands\Cart\" />
-    <Folder Include="Commands\Login\" />
-    <Folder Include="Commands\Orders\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="MediatR" Version="12.2.0" />
   </ItemGroup>
 
   <ItemGroup>

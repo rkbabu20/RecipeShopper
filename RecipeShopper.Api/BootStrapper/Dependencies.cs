@@ -1,5 +1,8 @@
 ﻿using RecipeShopper.CommandQuery.Registrations;
-using RecipeShopper.Data.Registrations;
+using RecipeShopper.Data.Migrations.Registrations;
+using RecipeShopper.AuthData.Migrations.Registrations;
+//using RecipeShopper.id
+using RecipeShopper.Data.Repositories.Registrations;
 using System.Text.Json.Serialization;
 
 namespace RecipeShopper.Api.BootStrapper
@@ -25,12 +28,15 @@ namespace RecipeShopper.Api.BootStrapper
                 builder.Services.RegisterMediatR();
                 builder.Services.RegisterDbContext(builder.Configuration);
                 builder.Services.RegisterRepositories();
+                builder.Services.RegisterAuthDataDbContext(builder.Configuration);
 
                 // Add services to the container.
                 builder.Services.AddControllers().AddJsonOptions(options => { options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); });
                 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
                 builder.Services.AddEndpointsApiExplorer();
-                builder.Services.AddSwaggerGen();
+                builder.Services.AddAuthorizationToSwagger();
+
+                builder.Services.AddCustomAuthorization();
             }
             return builder!;
         }

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using RecipeShopper.CommandQuery.Commands.Users.DeleteUserCommand;
-using RecipeShopper.Contracts;
+using RecipeShopper.Data.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;

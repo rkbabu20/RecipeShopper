@@ -16,7 +16,7 @@ namespace RecipeShopper.Data.Context
 
         #region Properties
         /// <summary>User table</summary>
-        public virtual DbSet<User> User { get; set; }
+        //public virtual DbSet<User> User { get; set; }
         /// <summary>Cart table</summary>
         public virtual DbSet<Cart> Cart { get; set; }
         /// <summary>Ingradient table</summary>
