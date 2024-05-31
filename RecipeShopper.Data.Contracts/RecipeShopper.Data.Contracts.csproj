@@ -7,8 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+    <ProjectReference Include="..\RecipeShopper.Domain\RecipeShopper.Domain.csproj" />
   </ItemGroup>
 
 </Project>

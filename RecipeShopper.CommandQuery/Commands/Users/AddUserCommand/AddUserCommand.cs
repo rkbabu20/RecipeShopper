@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using RecipeShopper.CommandQuery.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace RecipeShopper.CommandQuery.Commands.Users.AddUserCommand
     /// </summary>
     public class AddUserCommand : IRequest<AddUserCommandResponse>
     {
-        public AddUserCommand(Guid userId) { this.UserId = userId; }
-        public Guid UserId { get; private set; }
+        public AddUserCommand(UserDTO user) { User = user; }
+        public UserDTO User { get; private set; }
     }
 }

@@ -1,14 +1,18 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RecipeShopper.Api.Controllers.Base;
 using RecipeShopper.Api.Controllers.Requests;
+using RecipeShopper.CommandQuery.Commands.Users.AddUserCommand;
 using RecipeShopper.CommandQuery.Commands.Users.DeleteUserCommand;
+using RecipeShopper.CommandQuery.DTOs;
 using RecipeShopper.CommandQuery.Quaries.Users.AllUsersQuery;
 using RecipeShopper.CommandQuery.Quaries.Users.GetUserQuery;
 
 namespace RecipeShopper.Api.Controllers
 {
+    [Authorize]
     public class UserController : BaseController
     {
         private readonly IMediator _mediator = null;
@@ -81,7 +85,9 @@ namespace RecipeShopper.Api.Controllers
         public async Task<IActionResult> Add([FromBody] UserAddRequest request)
         {
             // Delete the user from DB
-            var result = new { IsSuucess = "true", Message = "User added" };
+            var user = _mapper.Map<UserDTO>(request);
+            user.UserId = Guid.NewGuid();
+            var result = await _mediator.Send(new AddUserCommand(user));
             return Ok(result);
         }
 

@@ -7,20 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Ingradients\" />
-    <Folder Include="Commands\Cart\" />
-    <Folder Include="Commands\Login\" />
-    <Folder Include="Commands\Orders\" />
-    <Folder Include="NewFolder\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="MediatR" Version="12.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\RecipeShopper.Data.Contracts\RecipeShopper.Data.Contracts.csproj" />
+    <ProjectReference Include="..\RecipeShopper.Data.Migrations\RecipeShopper.Data.Migrations.csproj" />
     <ProjectReference Include="..\RecipeShopper.Domain\RecipeShopper.Domain.csproj" />
   </ItemGroup>
 

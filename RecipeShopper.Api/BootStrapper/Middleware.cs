@@ -1,4 +1,7 @@
-﻿namespace RecipeShopper.Api.BootStrapper
+﻿using Microsoft.AspNetCore.Identity;
+using RecipeShopper.Domain.Entities;
+
+namespace RecipeShopper.Api.BootStrapper
 {
     /// <summary>
     /// Middleware configurations
@@ -18,6 +21,9 @@
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            // Identity api mapping
+            app.MapIdentityApi<IdentityUser>();
 
             app.UseHttpsRedirection();
 
