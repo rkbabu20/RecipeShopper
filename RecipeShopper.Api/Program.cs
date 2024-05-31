@@ -5,6 +5,6 @@ using RecipeShopper.Api.BootStrapper;
 WebApplication.CreateBuilder(args)
     .RegisterDependencies() // Register dependencies
     .Build() // Build application
-    .ConfigureMiddleware() // Register middleware
+    .ConfigureMiddleware() // Configure middleware
     .Run(); // Run application
 
