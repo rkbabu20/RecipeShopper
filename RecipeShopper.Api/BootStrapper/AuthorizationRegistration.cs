@@ -1,4 +1,5 @@
-﻿using RecipeShopper.AuthData.Migrations.Context;
+﻿using Microsoft.AspNetCore.Identity;
+using RecipeShopper.AuthData.Migrations.Context;
 using RecipeShopper.Domain.Entities;
 
 namespace RecipeShopper.Api.BootStrapper
@@ -10,7 +11,7 @@ namespace RecipeShopper.Api.BootStrapper
             if(service!=null)
             {
                 service.AddAuthorization();
-                service.AddIdentityApiEndpoints<User>()
+                service.AddIdentityApiEndpoints<IdentityUser>()
                     .AddEntityFrameworkStores<RecipeShopperAuthDataDbContext>();
             }
         }

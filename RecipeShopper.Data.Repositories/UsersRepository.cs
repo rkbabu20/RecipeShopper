@@ -1,4 +1,6 @@
-﻿using RecipeShopper.Data.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using RecipeShopper.Data.Context;
+using RecipeShopper.Data.Contracts;
 using RecipeShopper.Domain.Aggregates;
 using RecipeShopper.Domain.Aggregates.UsersAggregate;
 using RecipeShopper.Domain.Entities;
@@ -17,19 +19,23 @@ namespace RecipeShopper.Data.Repositories
     {
         #region Private variables
         List<User> _users = null;
+        RecipeShopperDbContext _dbContext=null;
         #endregion
 
         #region Constructor
-        public UsersRepository()
+        public UsersRepository(RecipeShopperDbContext dbContext)
         {
             ConstructMockUsersData();
+            _dbContext= dbContext;
         }
         #endregion
 
         #region Interface methods
         public async Task AddAsync(UsersAggregate request)
         {
-            _users.Add(request.User);
+            _dbContext.User.Add(request.User);
+            _dbContext.SaveChanges();
+            //_users.Add(request.User);
         }
 
         public async Task DeleteAsync(GenericRequest request)
@@ -47,7 +53,8 @@ namespace RecipeShopper.Data.Repositories
 
         public async Task<UsersAggregate> GetAllAsync()
         {
-            var usersAggregate = new UsersAggregate(_users);
+            var users = _dbContext.User.ToList();
+            var usersAggregate = new UsersAggregate(users);
             return usersAggregate;
         }
 

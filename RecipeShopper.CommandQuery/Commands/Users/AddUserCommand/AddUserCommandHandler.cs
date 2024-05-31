@@ -33,9 +33,8 @@ namespace RecipeShopper.CommandQuery.Commands.Users.AddUserCommand
         public async Task<AddUserCommandResponse> Handle(AddUserCommand request, CancellationToken cancellationToken)
         {
             var response = new AddUserCommandResponse();
-            UsersAggregate aggregate = new UsersAggregate(new User());
+            UsersAggregate aggregate = new UsersAggregate(_mapper.Map<User>(request.User));
             await _repositories.UsersRepository.AddAsync(aggregate);
-            response = _mapper.Map<AddUserCommandResponse>(aggregate);
             if (response != null && aggregate.IsUserAdded)
             {
                 response.Status = Enums.StatusTypeEnum.Success;

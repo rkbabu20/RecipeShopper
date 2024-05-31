@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RecipeShopper.AuthData.Migrations.Context;
-using RecipeShopper.AuthData.Migrations.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

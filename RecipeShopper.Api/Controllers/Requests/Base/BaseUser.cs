@@ -5,8 +5,7 @@ namespace RecipeShopper.Api.Controllers.Requests.Base
 {
     public class BaseUser
     {
-        public string UserId { get; set; }
-        /// <summary>First name</summary>
+       
         [Required]
         public string? FirstName { get; set; }
         /// <summary>Last name</summary>

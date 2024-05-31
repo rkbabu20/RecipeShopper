@@ -22,7 +22,7 @@ namespace RecipeShopper.Data.Migrations.Registrations
         /// <param name="configuration">Applicatoin configuration</param>
         public static void RegisterDbContext(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("SQL_DOCKER_2019");
+            var connectionString = configuration.GetConnectionString("MS_SQL_2019");
             services.AddDbContext<RecipeShopperDbContext>(options => options.UseSqlServer(connectionString));
         }
     }
