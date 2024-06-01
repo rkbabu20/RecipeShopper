@@ -7,6 +7,6 @@
     {
         Unspecified,
         Admin,
-        Role
+        User
     }
 }

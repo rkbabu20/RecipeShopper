@@ -12,11 +12,11 @@ namespace RecipeShopper.Domain.Entities
     public class Cart : DataProperties
     {
         /// <summary>Cart id</summary>
-        public Guid Id { get; set; }
+        public Guid CartId { get; set; }
         /// <summary>User</summary>
-        public User User { get; set; }
+        public User? User { get; set; }
         /// <summary>Recipes</summary>
-        public List<Recipe> Recipes { get; set; }
+        public List<Recipe>? Recipes { get; set; }
         /// <summary>Is order submission complete</summary>
         public bool IsOrderComplete { get; set; }
     }

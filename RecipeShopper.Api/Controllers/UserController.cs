@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Azure.Core;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -6,23 +7,37 @@ using RecipeShopper.Api.Controllers.Base;
 using RecipeShopper.Api.Controllers.Requests;
 using RecipeShopper.CommandQuery.Commands.Users.AddUserCommand;
 using RecipeShopper.CommandQuery.Commands.Users.DeleteUserCommand;
+using RecipeShopper.CommandQuery.Commands.Users.UpdateUserCommand;
 using RecipeShopper.CommandQuery.DTOs;
 using RecipeShopper.CommandQuery.Quaries.Users.AllUsersQuery;
 using RecipeShopper.CommandQuery.Quaries.Users.GetUserQuery;
 
 namespace RecipeShopper.Api.Controllers
 {
-    [Authorize]
+    /// <summary>
+    /// User controller
+    /// </summary>
     public class UserController : BaseController
     {
+        #region private variables
         private readonly IMediator _mediator = null;
         private readonly IMapper _mapper = null;
+        #endregion
+
+        #region Constructor
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="mediator">IMediator</param>
+        /// <param name="mapper">IMapper</param>
         public UserController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
             _mapper = mapper;
-        }
+        }// UserController
+        #endregion
 
+        #region Controller methods
         /// <summary>
         /// Get all users
         /// </summary>
@@ -32,7 +47,7 @@ namespace RecipeShopper.Api.Controllers
         {
             // Query call using mediator
             var result = await _mediator.Send(new GetAllUsersQuery());
-            return Ok(result);
+            return GetObjectResult(result);
         }
 
 
@@ -52,7 +67,7 @@ namespace RecipeShopper.Api.Controllers
             }
             // Query call using mediator
             var result = await _mediator.Send(new GetUserQuery(userIdGuid));
-            return Ok(result);
+            return GetObjectResult(result);
         }
 
 
@@ -73,7 +88,7 @@ namespace RecipeShopper.Api.Controllers
             }
             // Query call using mediator
             var result = await _mediator.Send(new DeleteUserCommand(userIdGuid));
-            return Ok(result);
+            return GetObjectResult(result);
         }
 
         /// <summary>
@@ -84,11 +99,11 @@ namespace RecipeShopper.Api.Controllers
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] UserAddRequest request)
         {
-            // Delete the user from DB
+            // Add user
             var user = _mapper.Map<UserDTO>(request);
             user.UserId = Guid.NewGuid();
             var result = await _mediator.Send(new AddUserCommand(user));
-            return Ok(result);
+            return GetObjectResult(result);
         }
 
         /// <summary>
@@ -96,13 +111,13 @@ namespace RecipeShopper.Api.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost("upate")]
+        [HttpPut("upate")]
         public async Task<IActionResult> Update([FromBody] UserUpdateRequest updateRequest)
         {
-            // Delete the user from DB
-            var result = new { IsSuucess = "true", Message = "User updated" };
-            return Ok(result);
+            var user = _mapper.Map<UserDTO>(updateRequest);
+            var result = await _mediator.Send(new UpdateUserCommand(user));
+            return GetObjectResult(result);
         }
-
+        #endregion
     }
 }

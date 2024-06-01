@@ -11,6 +11,6 @@ namespace RecipeShopper.CommandQuery.Quaries.Users.AllUsersQuery
     public class GetAllUsersResponse : BaseResponse
     {
         public GetAllUsersResponse() { }
-        public List<UserDTO>? Users { get; set; }
+        public List<ViewUserDTO>? Users { get; set; }
     }
 }
