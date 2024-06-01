@@ -13,35 +13,35 @@ namespace RecipeShopper.CommandQuery.Base
     public class Message
     {
         #region Constructors
+        /// <summary>Message</summary>
         public Message() { }
+
+        /// <summary>
+        /// Message
+        /// </summary>
+        /// <param name="message">Message</param>
         public Message(string message)
         {
             this.message = message;
-            this.MessageCode = string.Empty;
             this.MessageType = MessageTypeEnum.Information;
-        }
-        public Message(string message, string messageCode)
-        {
-            this.message = message;
-            this.MessageCode = messageCode;
-            this.MessageType = MessageTypeEnum.Information;
-        }
+        }//Message 
+
+        /// <summary>
+        /// Message
+        /// </summary>
+        /// <param name="message">Message</param>
+        /// <param name="messageType">Message type</param>
         public Message(string message, MessageTypeEnum messageType)
         {
             this.message = message;
             this.MessageType = messageType;
-        }
-        public Message(string message, string messageCode, MessageTypeEnum messageType)
-        {
-            this.message = message;
-            this.MessageCode = messageCode;
-            this.MessageType = messageType;
-        }
+        }//End Message
         #endregion
 
         #region Properties
+        /// <summary>Message</summary>
         public string? message { get; set; }
-        public string? MessageCode { get; set; }
+        /// <summary>Message Type</summary>
         public MessageTypeEnum MessageType { get; set; }
         #endregion
     }

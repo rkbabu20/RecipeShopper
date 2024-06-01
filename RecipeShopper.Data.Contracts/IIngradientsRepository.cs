@@ -12,5 +12,5 @@ namespace RecipeShopper.Data.Contracts
     /// <summary>
     /// Ingradients Repository interface
     /// </summary>
-    public interface IIngradientsRepository : IGetAllAsync<IngradientsAggrigate>,ICreateUpdateAsyncRepository<IngradientsAggrigate>,IAsynRepository<GenericRequest,IngradientsAggrigate>;
+    public interface IIngradientsRepository : IGetAllAsync<StockIngradientsAggrigate>,ICreateUpdateAsyncRepository<StockIngradientsAggrigate>,IAsynRepository<GenericRequest,StockIngradientsAggrigate>;
 }

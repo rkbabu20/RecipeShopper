@@ -7,6 +7,9 @@ namespace RecipeShopper.Api.Controllers.Requests
     /// </summary>
     public class UserUpdateRequest : BaseUser
     {
-
+        /// <summary>
+        /// UserId
+        /// </summary>
+        public Guid UserId { get; set; }
     }
 }

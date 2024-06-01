@@ -1,14 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RecipeShopper.Data.Context;
-using RecipeShopper.Data.Contracts;
+﻿using RecipeShopper.Data.Contracts;
 using RecipeShopper.Domain.Aggregates;
 using RecipeShopper.Domain.Aggregates.UsersAggregate;
 using RecipeShopper.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RecipeShopper.DBContexts.DatabaseContext;
 
 namespace RecipeShopper.Data.Repositories
 {
@@ -19,60 +13,78 @@ namespace RecipeShopper.Data.Repositories
     {
         #region Private variables
         List<User> _users = null;
-        RecipeShopperDbContext _dbContext=null;
+        RecipeShopperDbContext _dbContext = null;
         #endregion
 
         #region Constructor
+        /// <summary>
+        /// User repository
+        /// </summary>
+        /// <param name="dbContext">dbcontext</param>
         public UsersRepository(RecipeShopperDbContext dbContext)
         {
-            ConstructMockUsersData();
-            _dbContext= dbContext;
+            _dbContext = dbContext;
         }
         #endregion
 
         #region Interface methods
         public async Task AddAsync(UsersAggregate request)
         {
-            _dbContext.User.Add(request.User);
-            _dbContext.SaveChanges();
-            //_users.Add(request.User);
+            if (request != null && request.User != null)
+            {
+                request.User.CreateDate = DateTime.Now;
+                request.User.ModifiedDate = DateTime.Now;
+                _dbContext.Users.Add(request.User);
+                request.IsAdded = _dbContext.SaveChanges() > 0;
+            }
         }
 
         public async Task DeleteAsync(GenericRequest request)
         {
-            if (_users.Exists(x => x.UserId.Equals(request.RequestId)))
-                _users.Remove(_users.Find(x => x.UserId.Equals(request.RequestId)));
+            if (request != null && request.RequestId != Guid.Empty)
+            {
+                var userAggregate = await GetAsync(request).ConfigureAwait(false);
+                if (userAggregate != null && userAggregate.User != null)
+                {
+                    _dbContext.Users.Remove(userAggregate.User!);
+                    _dbContext.SaveChanges();
+                }
+            }
         }
 
         public async Task<UsersAggregate> GetAsync(GenericRequest request)
         {
-            // Implement logic here
-            var usersAggrigate = new UsersAggregate(_users.Find(x => x.UserId.Equals(request.RequestId)));
-            return usersAggrigate;
+            // Get user from db
+            return new UsersAggregate(_dbContext.Users.Find(request.RequestId!));
         }
 
         public async Task<UsersAggregate> GetAllAsync()
         {
-            var users = _dbContext.User.ToList();
-            var usersAggregate = new UsersAggregate(users);
-            return usersAggregate;
+            return new UsersAggregate(_dbContext.Users.ToList());
         }
 
         public async Task UpdateAsync(UsersAggregate request)
         {
-            throw new NotImplementedException();
+            var userAggregate = await GetAsync(new GenericRequest() { RequestId = request.User.UserId }).ConfigureAwait(false);
+            if (userAggregate != null && userAggregate.User != null)
+            {
+                userAggregate.User.Email = request.User.Email;
+                userAggregate.User.LastName = request.User.LastName;
+                userAggregate.User.FirstName = request.User.FirstName;
+                userAggregate.User.Role = request.User.Role;
+                userAggregate.User.ModifiedDate = DateTime.Now;
+                request.IsUpdated = _dbContext.SaveChanges() > 0;
+            }
         }
-        #endregion
-
-        #region Private members
-        private void ConstructMockUsersData()
+        public async Task<UsersAggregate> GetUserByEmailAsync(string email)
         {
-            if (_users == null)
-                _users = new List<User>();
-            _users.Add(new User() { UserId = Guid.NewGuid(), FirstName = "Ramesh", LastName = "Kampati", Email = "ramesh.kampati@gmail.com", Role = Domain.Enums.UserRoleEnum.Admin, CreateDate = DateTime.Now, ModifiedDate = DateTime.Now });
-            _users.Add(new User() { UserId = Guid.NewGuid(), FirstName = "Radhika", LastName = "Kampati", Email = "radhika.kampati@gmail.com", Role = Domain.Enums.UserRoleEnum.User, CreateDate = DateTime.Now, ModifiedDate = DateTime.Now });
-            _users.Add(new User() { UserId = Guid.NewGuid(), FirstName = "Lalitha", LastName = "Kampati", Email = "lalitha.kampati@gmail.com", Role = Domain.Enums.UserRoleEnum.User, CreateDate = DateTime.Now, ModifiedDate = DateTime.Now });
-            _users.Add(new User() { UserId = Guid.NewGuid(), FirstName = "Lasya", LastName = "Kampati", Email = "lasya.kampati@gmail.com", Role = Domain.Enums.UserRoleEnum.User, CreateDate = DateTime.Now, ModifiedDate = DateTime.Now });
+            var userAggregate = new UsersAggregate(user: null!);
+            try
+            {
+                userAggregate = new UsersAggregate(_dbContext.Users.ToList().First(u => u.Email == email));
+            }
+            catch { }//Exception ignored intentionally
+            return userAggregate!;
         }
         #endregion
     }

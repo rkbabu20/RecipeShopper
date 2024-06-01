@@ -13,10 +13,5 @@ namespace RecipeShopper.CommandQuery.Commands.Users.AddUserCommand
     /// </summary>
     public class AddUserCommandResponse : BaseResponse
     {
-        /// <summary>
-        /// Get user response
-        /// </summary>
-        public AddUserCommandResponse() { }
-
     }
 }

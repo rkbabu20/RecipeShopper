@@ -22,17 +22,18 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.6.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="8.0.2" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.6.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RecipeShopper.AuthData.Migrations\RecipeShopper.AuthData.Migrations.csproj" />
     <ProjectReference Include="..\RecipeShopper.CommandQuery\RecipeShopper.CommandQuery.csproj" />
-    <ProjectReference Include="..\RecipeShopper.Data.Migrations\RecipeShopper.Data.Migrations.csproj" />
     <ProjectReference Include="..\RecipeShopper.Data.Repositories\RecipeShopper.Data.Repositories.csproj" />
     <ProjectReference Include="..\RecipeShopper.Data\RecipeShopper.Data.csproj" />
+    <ProjectReference Include="..\RecipeShopper.DBContexts\RecipeShopper.DBContexts.csproj" />
   </ItemGroup>
 
 </Project>

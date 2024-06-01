@@ -12,7 +12,9 @@ namespace RecipeShopper.CommandQuery.Enums
     public enum MessageTypeEnum
     {
         Unspecified,
-        Error,
+        ValidationError,
+        ApplicationError,
+        NoResourceFoundError,
         Warning,
         Information
     };
