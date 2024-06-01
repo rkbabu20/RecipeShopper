@@ -14,7 +14,7 @@ namespace RecipeShopper.Data.Repositories
     /// </summary>
     public class IngradientsRepository : IIngradientsRepository
     {
-        public Task AddAsync(IngradientsAggrigate request)
+        public Task AddAsync(StockIngradientsAggrigate request)
         {
             throw new NotImplementedException();
         }
@@ -24,17 +24,17 @@ namespace RecipeShopper.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IngradientsAggrigate> GetAsync(GenericRequest request)
+        public Task<StockIngradientsAggrigate> GetAsync(GenericRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IngradientsAggrigate> GetAllAsync()
+        public Task<StockIngradientsAggrigate> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateAsync(IngradientsAggrigate request)
+        public Task UpdateAsync(StockIngradientsAggrigate request)
         {
             throw new NotImplementedException();
         }

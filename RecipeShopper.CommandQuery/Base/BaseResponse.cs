@@ -15,7 +15,11 @@ namespace RecipeShopper.CommandQuery.Base
         /// <summary>
         /// Base Response
         /// </summary>
-        public BaseResponse() { }
+        public BaseResponse() 
+        {
+            Status = StatusTypeEnum.Success;
+            Messages = new List<Message>();
+        }
         public StatusTypeEnum Status { get; set; }
         public List<Message> Messages { get; set; }
     }

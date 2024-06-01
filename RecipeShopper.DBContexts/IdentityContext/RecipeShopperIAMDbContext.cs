@@ -20,10 +20,14 @@ namespace RecipeShopper.DBContexts.IdentityContext
         /// <param name="options">Db context options</param>
         public RecipeShopperIAMDbContext(DbContextOptions<RecipeShopperIAMDbContext> options) : base(options) { }
 
+        /// <summary>
+        /// On model creating 
+        /// </summary>
+        /// <param name="builder"></param>
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
+            builder.Entity<IdentityUser>(entity => { entity.ToTable(name: "AspNetUsers"); });
         }
 
     }// End RecipeShopperIAMDbContext

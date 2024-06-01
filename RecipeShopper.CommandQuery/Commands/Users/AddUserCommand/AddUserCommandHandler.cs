@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using RecipeShopper.CommandQuery.Base;
 using RecipeShopper.Data.Contracts;
 using RecipeShopper.Domain.Aggregates.UsersAggregate;
 using RecipeShopper.Domain.Entities;
@@ -12,9 +13,11 @@ using System.Threading.Tasks;
 namespace RecipeShopper.CommandQuery.Commands.Users.AddUserCommand
 {
     /// <summary>
-    /// Get Get users query handler
+    /// User command handler
     /// </summary>
-    public class AddUserCommandHandler : IRequestHandler<AddUserCommand, AddUserCommandResponse>
+    public class AddUserCommandHandler
+        : BaseHandler<AddUserCommand, AddUserCommandResponse>,
+        IRequestHandler<AddUserCommand, AddUserCommandResponse>
     {
         #region Private variables
         private readonly IRepositories _repositories = null;
@@ -33,17 +36,36 @@ namespace RecipeShopper.CommandQuery.Commands.Users.AddUserCommand
         public async Task<AddUserCommandResponse> Handle(AddUserCommand request, CancellationToken cancellationToken)
         {
             var response = new AddUserCommandResponse();
-            UsersAggregate aggregate = new UsersAggregate(_mapper.Map<User>(request.User));
-            await _repositories.UsersRepository.AddAsync(aggregate);
-            if (response != null && aggregate.IsUserAdded)
+            try
             {
-                response.Status = Enums.StatusTypeEnum.Success;
+                // Step 1 : Validate the request
+                await Validate(request, response).ConfigureAwait(false);
+                if (response.Status == Enums.StatusTypeEnum.Success)
+                {
+                    // Step 2 : Add user
+                    UsersAggregate aggregate = new UsersAggregate(_mapper.Map<User>(request.User));
+                    await _repositories.UsersRepository.AddAsync(aggregate).ConfigureAwait(false);
+
+                    // Step 3 : Check if user really added
+                    if (response != null && aggregate.IsAdded)
+                        HandleMessage(response, "User added sucessfully.");
+                    else response!.Status = Enums.StatusTypeEnum.Failure;
+                }
             }
-           else
-            {
-                response.Status = Enums.StatusTypeEnum.Failure;
-            }
+            catch (Exception ex) { HandleException(response, ex); }
             return response;
+        }
+
+        protected async override Task Validate(AddUserCommand request, AddUserCommandResponse response)
+        {
+            if (request == null) { base.HandleMessage(response, "Request cannot be null", Enums.MessageTypeEnum.ValidationError); }
+            else if (request.User == null) { base.HandleMessage(response, "User cannot be be null.", Enums.MessageTypeEnum.ValidationError); }
+            else
+            {
+                var userAggregate = await _repositories.UsersRepository.GetUserByEmailAsync(request.User.Email);
+                if (userAggregate != null && userAggregate.User != null)
+                    base.HandleMessage(response, $"User already exists with the given email {request.User.Email}.", Enums.MessageTypeEnum.ValidationError);
+            }
         }
         #endregion
     }

@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.VisualBasic;
+using RecipeShopper.CommandQuery.Base;
 using RecipeShopper.Data.Contracts;
 using System;
 using System.Collections.Generic;
@@ -12,7 +14,9 @@ namespace RecipeShopper.CommandQuery.Quaries.Users.AllUsersQuery
     /// <summary>
     /// Get all users query handler
     /// </summary>
-    public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, GetAllUsersResponse>
+    public class GetAllUsersQueryHandler :
+        BaseHandler<GetAllUsersQuery, GetAllUsersResponse>,
+        IRequestHandler<GetAllUsersQuery, GetAllUsersResponse>
     {
         #region Private variables
         private readonly IRepositories _repositories = null;
@@ -30,17 +34,29 @@ namespace RecipeShopper.CommandQuery.Quaries.Users.AllUsersQuery
         public async Task<GetAllUsersResponse> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
             var response = new GetAllUsersResponse();
-            var usersAggregate = await _repositories.UsersRepository.GetAllAsync().ConfigureAwait(false);
-            response = _mapper.Map<GetAllUsersResponse>(usersAggregate);
-            if (response != null && response.Users.Any())
+            try
             {
-                response.Status = Enums.StatusTypeEnum.Success;
+                // Step 1 : Validate
+                await Validate(request, response).ConfigureAwait(false);
+                if (response.Status == Enums.StatusTypeEnum.Success)
+                {
+                    // Step 2: Get all users
+                    var usersAggregate = await _repositories.UsersRepository.GetAllAsync().ConfigureAwait(false);
+                    response = _mapper.Map<GetAllUsersResponse>(usersAggregate);
+                    // Step 3 : Handle messages
+                    if (response != null && response.Users!.Any())
+                        HandleMessage(response!, "Users retrieved successfully.");
+                    else
+                        HandleMessage(response!, "No users found.", Enums.MessageTypeEnum.NoResourceFoundError);
+                }
             }
-            else
-            {
-                response.Status = Enums.StatusTypeEnum.Failure;
-            }
-            return response;
+            catch (Exception ex) { HandleException(response, ex); }
+            return response!;
+        }
+
+        protected async override Task Validate(GetAllUsersQuery request, GetAllUsersResponse response)
+        {
+            if (request == null) { base.HandleMessage(response, "Request cannot be null", Enums.MessageTypeEnum.ValidationError); }
         }
         #endregion
     }

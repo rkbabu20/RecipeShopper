@@ -13,12 +13,5 @@ namespace RecipeShopper.CommandQuery.Commands.Users.DeleteUserCommand
     /// </summary>
     public class DeleteUserCommandResponse : BaseResponse
     {
-        /// <summary>
-        /// Get user response
-        /// </summary>
-        public DeleteUserCommandResponse() { }
-
-        /// <summary>User</summary>
-        public UserDTO? User { get; set; }
     }
 }

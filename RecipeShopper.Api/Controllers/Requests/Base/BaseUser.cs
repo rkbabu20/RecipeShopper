@@ -14,6 +14,7 @@ namespace RecipeShopper.Api.Controllers.Requests.Base
         /// <summary>Email</summary>
         [Required]
         public string? Email { get; set; }
+        [Required]
         public UserRoleEnum Role { get; set; }
 
     }

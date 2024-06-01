@@ -14,8 +14,8 @@ namespace RecipeShopper.Domain.Entities
         /// <summary>Order id</summary>
         public Guid OrderId { get; set; }
         /// <summary>User</summary>
-        public User User { get; set; }
+        public User? User { get; set; }
         /// <summary>Recipes</summary>
-        public List<Recipe> Recipes { get; set; }
+        public List<Recipe>? Recipes { get; set; }
     }// Order
 }

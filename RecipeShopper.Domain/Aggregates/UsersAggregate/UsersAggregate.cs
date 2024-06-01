@@ -1,4 +1,5 @@
-﻿using RecipeShopper.Domain.Entities;
+﻿using RecipeShopper.Domain.Aggregates.Base;
+using RecipeShopper.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,11 @@ namespace RecipeShopper.Domain.Aggregates.UsersAggregate
     /// <summary>
     /// Users aggregate
     /// </summary>
-    public class UsersAggregate
+    public class UsersAggregate : BaseAggregate
     {
+        #region members
+
+        #endregion
         #region Constructor
         /// <summary>
         /// Users agrregate
@@ -34,13 +38,11 @@ namespace RecipeShopper.Domain.Aggregates.UsersAggregate
 
         #region Users
         /// <summary>Users</summary>
-        public List<User> Users { get; private set; }
+        public List<User>? Users { get; private set; }
 
         /// <summary>Users</summary>
-        public User User { get; private set; }
+        public User? User { get; private set; }
 
-        /// <summary>User add status</summary>
-        public bool IsUserAdded => User != null && User.UserId! != Guid.Empty;
         #endregion
     }
 }

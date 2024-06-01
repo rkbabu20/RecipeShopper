@@ -36,6 +36,7 @@ namespace RecipeShopper.CommandQuery.AutoMapperProfiles
                .ReverseMap();
 
             CreateMap<User, UserDTO>().ReverseMap();
+            CreateMap<User, ViewUserDTO>().ReverseMap();
             CreateMap<DomainEnum.UserRoleEnum, CommandQuiriesEums.UserRoleEnum>().ReverseMap();
         }
     }

@@ -12,6 +12,6 @@ namespace RecipeShopper.CommandQuery.Quaries.Users.GetUserQuery
     /// </summary>
     public class GetUserQuery(Guid userId) : IRequest<GetUserResponse>
     {
-        public Guid UserId => userId;
+        public Guid UserId { get; set; } = userId;
     }
 }

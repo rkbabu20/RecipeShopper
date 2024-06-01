@@ -16,6 +16,6 @@ namespace RecipeShopper.CommandQuery.Commands.Users.UpdateUserCommand
     public class UpdateUserCommand(UserDTO userDto)
         : IRequest<UpdateUserCommandResponse>
     {
-        public UserDTO User => userDto;
+        public UserDTO User { get; set; } = userDto;
     }
 }

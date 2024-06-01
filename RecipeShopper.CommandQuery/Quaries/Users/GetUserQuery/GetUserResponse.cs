@@ -19,6 +19,6 @@ namespace RecipeShopper.CommandQuery.Quaries.Users.GetUserQuery
         public GetUserResponse() { }
 
         /// <summary>User</summary>
-        public UserDTO? User { get; set; }
+        public ViewUserDTO? User { get; set; }
     }
 }

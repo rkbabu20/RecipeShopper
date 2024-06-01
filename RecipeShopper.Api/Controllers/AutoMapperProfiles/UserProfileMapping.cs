@@ -9,6 +9,7 @@ namespace RecipeShopper.Api.Controllers.AutoMapperProfiles
        public UserProfileMapping()
         {
             CreateMap<UserAddRequest, UserDTO>().ReverseMap();
+            CreateMap<UserUpdateRequest, UserDTO>().ReverseMap();
         }
     }
 }
