@@ -56,9 +56,9 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Commands.Up
             else
             {
                 // Check if user exists to update
-                var existingUserAggregate = await _repositories.UsersRepository.GetAsync(new Domain.Aggregates.GenericRequest() { RequestId = request.User.UserId });
+                var existingUserAggregate = await _repositories.UsersRepository.GetAsync(new Domain.Aggregates.GenericRequest() { Id = request.User.Id! });
                 if (existingUserAggregate.User == null)
-                    HandleMessage(response, $"User not found for the user id : {request.User.UserId}. Hence cannot be updated.", Enums.MessageTypeEnum.ValidationError);
+                    HandleMessage(response, $"User not found for the user id : {request.User.Id}. Hence cannot be updated.", Enums.MessageTypeEnum.ValidationError);
             }
             #endregion
         }

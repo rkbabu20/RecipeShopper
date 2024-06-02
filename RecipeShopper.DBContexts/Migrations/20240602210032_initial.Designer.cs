@@ -12,7 +12,7 @@ using RecipeShopper.DBContexts.DatabaseContext;
 namespace RecipeShopper.DBContexts.Migrations
 {
     [DbContext(typeof(RecipeShopperDbContext))]
-    [Migration("20240602202448_initial")]
+    [Migration("20240602210032_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -335,9 +335,6 @@ namespace RecipeShopper.DBContexts.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -357,9 +354,6 @@ namespace RecipeShopper.DBContexts.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -367,9 +361,6 @@ namespace RecipeShopper.DBContexts.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -380,17 +371,11 @@ namespace RecipeShopper.DBContexts.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)

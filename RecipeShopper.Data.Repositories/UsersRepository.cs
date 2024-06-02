@@ -32,8 +32,6 @@ namespace RecipeShopper.Data.Repositories
         {
             if (request != null && request.User != null)
             {
-                request.User.CreateDate = DateTime.Now;
-                request.User.ModifiedDate = DateTime.Now;
                 _dbContext.Users.Add(request.User);
                 request.IsAdded = _dbContext.SaveChanges() > 0;
             }
@@ -41,7 +39,7 @@ namespace RecipeShopper.Data.Repositories
 
         public async Task DeleteAsync(GenericRequest request)
         {
-            if (request != null && request.RequestId != Guid.Empty)
+            if (request != null && !string.IsNullOrWhiteSpace(request.Id))
             {
                 var userAggregate = await GetAsync(request).ConfigureAwait(false);
                 if (userAggregate != null && userAggregate.User != null)
@@ -55,7 +53,7 @@ namespace RecipeShopper.Data.Repositories
         public async Task<UsersAggregate> GetAsync(GenericRequest request)
         {
             // Get user from db
-            return new UsersAggregate(_dbContext.Users.Find(request.RequestId!));
+            return new UsersAggregate(_dbContext.Users.Find(request.Id));
         }
 
         public async Task<UsersAggregate> GetAllAsync()
@@ -65,14 +63,12 @@ namespace RecipeShopper.Data.Repositories
 
         public async Task UpdateAsync(UsersAggregate request)
         {
-            var userAggregate = await GetAsync(new GenericRequest() { RequestId = request.User.UserId }).ConfigureAwait(false);
+            var userAggregate = await GetAsync(new GenericRequest() { Id = request.User!.Id }).ConfigureAwait(false);
             if (userAggregate != null && userAggregate.User != null)
             {
                 userAggregate.User.Email = request.User.Email;
                 userAggregate.User.LastName = request.User.LastName;
                 userAggregate.User.FirstName = request.User.FirstName;
-                userAggregate.User.Role = request.User.Role;
-                userAggregate.User.ModifiedDate = DateTime.Now;
                 request.IsUpdated = _dbContext.SaveChanges() > 0;
             }
         }

@@ -18,11 +18,11 @@ namespace RecipeShopper.Application.Services.MapperProfiles
         {
             // DeleteUser command
             CreateMap<DeleteUserCommand, GenericRequest>()
-                .ForMember(dest => dest.RequestId, opt => opt.MapFrom(src => src.UserId)).ReverseMap();
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id)).ReverseMap();
 
             // GetUserQuery
             CreateMap<GetUserQuery, GenericRequest>()
-                .ForMember(dest => dest.RequestId, opt => opt.MapFrom(src => src.UserId)).ReverseMap();
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id)).ReverseMap();
 
             // GetStockIngradientQuery
             CreateMap<GetStockIngradientQuery, GenericRequest>()

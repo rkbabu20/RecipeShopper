@@ -54,7 +54,7 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Quaries.Get
                     if (response != null && response.User != null)
                         HandleMessage(response, "User retrieved successfully.");
                     else
-                        HandleMessage(response, $"No user found for userid: {request.UserId}", Enums.MessageTypeEnum.NoResourceFoundError);
+                        HandleMessage(response, $"No user found for userid: {request.Id}", Enums.MessageTypeEnum.NoResourceFoundError);
                 }
             }
             catch (Exception ex) { HandleException(response, ex); }
@@ -70,7 +70,7 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Quaries.Get
         protected async override Task Validate(GetUserQuery request, GetUserResponse response)
         {
             if (request == null) { base.HandleMessage(response, "Request cannot be null", Enums.MessageTypeEnum.ValidationError); }
-            else if (request.UserId == Guid.Empty) { base.HandleMessage(response, $"Invalid user id passed {request.UserId}", Enums.MessageTypeEnum.ValidationError); }
+            else if (string.IsNullOrWhiteSpace(request.Id)) { base.HandleMessage(response, $"Invalid user id passed {request.Id}", Enums.MessageTypeEnum.ValidationError); }
         }// End Validate
         #endregion
     }

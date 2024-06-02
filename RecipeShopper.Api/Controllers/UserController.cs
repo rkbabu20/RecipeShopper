@@ -59,13 +59,8 @@ namespace RecipeShopper.Api.Controllers
         [HttpGet("{userId}")]
         public async Task<IActionResult> Get([FromRoute] string userId)
         {
-            Guid userIdGuid = Guid.Empty;
-            if (!Guid.TryParse(userId, out userIdGuid))
-            {
-                return BadRequest();
-            }
             // Query call using mediator
-            var result = await _mediator.Send(new GetUserQuery(userIdGuid));
+            var result = await _mediator.Send(new GetUserQuery(userId));
             return GetObjectResult(result);
         }
 
@@ -79,14 +74,7 @@ namespace RecipeShopper.Api.Controllers
         public async Task<IActionResult> Delete([FromRoute] string userId)
         {
             // Delete the user from DB
-            // write logic to return user for specified email
-            Guid userIdGuid = Guid.Empty;
-            if (!Guid.TryParse(userId, out userIdGuid))
-            {
-                return BadRequest();
-            }
-            // Query call using mediator
-            var result = await _mediator.Send(new DeleteUserCommand(userIdGuid));
+            var result = await _mediator.Send(new DeleteUserCommand(userId));
             return GetObjectResult(result);
         }
 
@@ -100,7 +88,7 @@ namespace RecipeShopper.Api.Controllers
         {
             // Add user
             var user = _mapper.Map<UserDTO>(request);
-            user.UserId = Guid.NewGuid();
+            user.Id = Guid.NewGuid().ToString();
             var result = await _mediator.Send(new AddUserCommand(user));
             return GetObjectResult(result);
         }
