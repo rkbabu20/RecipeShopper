@@ -19,6 +19,8 @@ namespace RecipeShopper.Domain.Aggregates.Base
         public bool IsDeleted { get; set; }
         /// <summary>Status to know if entity is updated in db</summary>
         public bool IsUpdated { get; set; }
+        /// <summary>Status to know if entity is partially updated</summary>
+        public bool IsPatched { get; set; }
         #endregion
 
     }//End BaseAggregate

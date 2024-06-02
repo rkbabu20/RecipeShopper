@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RecipeShopper.CommandQuery\RecipeShopper.CommandQuery.csproj" />
+    <ProjectReference Include="..\RecipeShopper.Application.Services\RecipeShopper.Application.Services.csproj" />
     <ProjectReference Include="..\RecipeShopper.Data.Repositories\RecipeShopper.Data.Repositories.csproj" />
     <ProjectReference Include="..\RecipeShopper.Data\RecipeShopper.Data.csproj" />
     <ProjectReference Include="..\RecipeShopper.DBContexts\RecipeShopper.DBContexts.csproj" />

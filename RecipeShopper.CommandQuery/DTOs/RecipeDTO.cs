@@ -13,6 +13,6 @@ namespace RecipeShopper.CommandQuery.DTOs
         /// <summary>Recipe name</summary>
         public string Name { get; set; }
         /// <summary>Ingradients</summary>
-        public List<IngradientDTO> Ingradients { get; set;}
+        public List<StockIngradientDTO> Ingradients { get; set;}
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using RecipeShopper.CommandQuery.Base;
+using RecipeShopper.CommandQuery.Extensions;
 using RecipeShopper.Data.Contracts;
 using RecipeShopper.Domain.Aggregates;
 using System;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 namespace RecipeShopper.CommandQuery.Commands.Users.DeleteUserCommand
 {
     /// <summary>
-    /// Get Get users query handler
+    /// Delete user command handler
     /// </summary>
     public class DeleteUserCommandHandler
         : BaseHandler<DeleteUserCommand, DeleteUserCommandResponse>,
@@ -45,7 +46,7 @@ namespace RecipeShopper.CommandQuery.Commands.Users.DeleteUserCommand
             {
                 // Step 1 : Validate the input
                 await Validate(request, response).ConfigureAwait(false);
-                if (response.Status == Enums.StatusTypeEnum.Success)
+                if (response.IsValid())
                 {
                     // Step 2: Delete the user from db
                     await _repositories.UsersRepository.DeleteAsync(new Domain.Aggregates.GenericRequest() { RequestId = request.UserId }).ConfigureAwait(false);

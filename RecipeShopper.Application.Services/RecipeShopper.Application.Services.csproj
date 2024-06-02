@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="FunctionalFeature\Cart\Commands\" />
+    <Folder Include="FunctionalFeature\Cart\Quaries\" />
+    <Folder Include="FunctionalFeature\Login\Commands\" />
+    <Folder Include="FunctionalFeature\Login\Quaries\" />
+    <Folder Include="FunctionalFeature\Orders\Commands\" />
+    <Folder Include="FunctionalFeature\Orders\Quaries\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RecipeShopper.Application.Contracts\RecipeShopper.Application.Contracts.csproj" />
+    <ProjectReference Include="..\RecipeShopper.Domain\RecipeShopper.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

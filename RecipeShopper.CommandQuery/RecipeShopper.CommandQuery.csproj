@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Ingradients\" />
     <Folder Include="Commands\Cart\" />
     <Folder Include="Commands\Login\" />
     <Folder Include="Commands\Orders\" />
@@ -19,7 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RecipeShopper.Data.Contracts\RecipeShopper.Data.Contracts.csproj" />
     <ProjectReference Include="..\RecipeShopper.Domain\RecipeShopper.Domain.csproj" />
   </ItemGroup>
 

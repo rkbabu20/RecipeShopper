@@ -1,4 +1,4 @@
-﻿using RecipeShopper.Data.Contracts;
+﻿using RecipeShopper.Application.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +13,14 @@ namespace RecipeShopper.Data.Repositories
     /// </summary>
     /// <param name="usersRepository">IUsersRepository</param>
     /// <param name="cartRepository">ICartRepository</param>
-    /// <param name="ingradientRepository">IIngradientRepository</param>
+    /// <param name="stockIngradientRepository">IStockIngradientsRepository</param>
     /// <param name="ordersRepository">IOrderRepository</param>
     /// <param name="loginRepository">ILoginRepository</param>
     public class Repositories
         (
             IUsersRepository usersRepository,
             ICartRepository cartRepository,
-            IIngradientsRepository ingradientRepository,
+            IStockIngradientsRepository stockIngradientRepository,
             IOrdersRepository ordersRepository,
             ILoginRepository loginRepository
         ) 
@@ -33,7 +33,7 @@ namespace RecipeShopper.Data.Repositories
         /// <summary>Cart repository</summary>
         public ICartRepository CartRepository => cartRepository;
         /// <summary>Ingradients repository</summary>
-        public IIngradientsRepository IngradientRepository => ingradientRepository;
+        public IStockIngradientsRepository StockIngradientRepository => stockIngradientRepository;
         /// <summary>Orders repository</summary>
         public IOrdersRepository OrdersRepository => ordersRepository;
         /// <summary>Login repository</summary>

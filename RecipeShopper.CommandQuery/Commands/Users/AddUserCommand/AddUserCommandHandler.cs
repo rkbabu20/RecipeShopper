@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using RecipeShopper.CommandQuery.Base;
+using RecipeShopper.CommandQuery.Extensions;
 using RecipeShopper.Data.Contracts;
 using RecipeShopper.Domain.Aggregates.UsersAggregate;
 using RecipeShopper.Domain.Entities;
@@ -40,7 +41,7 @@ namespace RecipeShopper.CommandQuery.Commands.Users.AddUserCommand
             {
                 // Step 1 : Validate the request
                 await Validate(request, response).ConfigureAwait(false);
-                if (response.Status == Enums.StatusTypeEnum.Success)
+                if (response.IsValid())
                 {
                     // Step 2 : Add user
                     UsersAggregate aggregate = new UsersAggregate(_mapper.Map<User>(request.User));
@@ -49,7 +50,7 @@ namespace RecipeShopper.CommandQuery.Commands.Users.AddUserCommand
                     // Step 3 : Check if user really added
                     if (response != null && aggregate.IsAdded)
                         HandleMessage(response, "User added sucessfully.");
-                    else response!.Status = Enums.StatusTypeEnum.Failure;
+                    else HandleMessage(response!, "User add failed.", Enums.MessageTypeEnum.ApplicationError);
                 }
             }
             catch (Exception ex) { HandleException(response, ex); }
