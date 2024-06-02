@@ -10,9 +10,11 @@ namespace RecipeShopper.Api.BootStrapper
         {
             if(service!=null)
             {
-                service.AddAuthorization();
-                service.AddIdentityApiEndpoints<IdentityUser>()
-                    .AddEntityFrameworkStores<RecipeShopperIAMDbContext>();
+                //service.AddAuthorization();
+                #region Logic Points to RecipeShopperIAMDbContext 
+                //service.AddIdentityApiEndpoints<IdentityUser>()
+                //    .AddEntityFrameworkStores<RecipeShopperIAMDbContext>();
+                #endregion
             }
         }
     }

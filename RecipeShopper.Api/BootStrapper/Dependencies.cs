@@ -24,15 +24,17 @@ namespace RecipeShopper.Api.BootStrapper
                 builder.Services.AddAutoMapper(assemblies);
                 // MediateR registration - For CQRS
                 builder.Services.RegisterMediatR();
-                builder.Services.RegisterDbContext(builder.Configuration);
+                //builder.Services.RegisterDbContext(builder.Configuration);
                 builder.Services.RegisterRepositories();
-                builder.Services.RegisterIAMDbContext(builder.Configuration);
+              //  builder.Services.RegisterIAMDbContext(builder.Configuration);
+                //builder.Services.RegisterAuthDBContext(builder.Configuration);
                 // Add services to the container.
                 builder.Services.AddControllers().AddJsonOptions(options => { options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); });
                 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
                 builder.Services.AddEndpointsApiExplorer();
-                builder.Services.AddAuthorizationToSwagger();
-                builder.Services.AddCustomAuthorization();
+                //builder.Services.AddAuthorizationToSwagger();
+                //builder.Services.CustomAuthenticationRegistration(builder.Configuration);
+                //builder.Services.AddCustomAuthorization();
             }
             return builder!;
         }

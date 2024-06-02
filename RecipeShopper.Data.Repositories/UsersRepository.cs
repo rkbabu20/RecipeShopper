@@ -71,7 +71,7 @@ namespace RecipeShopper.Data.Repositories
                 userAggregate.User.Email = request.User.Email;
                 userAggregate.User.LastName = request.User.LastName;
                 userAggregate.User.FirstName = request.User.FirstName;
-                userAggregate.User.Role = request.User.Role;
+                //userAggregate.User.Role = request.User.Role;
                 userAggregate.User.ModifiedDate = DateTime.Now;
                 request.IsUpdated = _dbContext.SaveChanges() > 0;
             }

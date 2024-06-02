@@ -23,10 +23,13 @@ namespace RecipeShopper.Api.BootStrapper
             }
 
             // Identity api mapping
-            app.MapIdentityApi<IdentityUser>();
+            #region Identity api mapping
+            //app.MapIdentityApi<User>();
+            #endregion
 
             app.UseHttpsRedirection();
-
+            //Add Use authentication
+            //app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();

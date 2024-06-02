@@ -11,7 +11,7 @@ namespace RecipeShopper.Domain.Entities
     /// <summary>
     /// User entity
     /// </summary>
-    public class User 
+    public class User : IdentityUser
     {
         /// <summary>User Id</summary>
         public Guid UserId { get; set; }
@@ -20,12 +20,8 @@ namespace RecipeShopper.Domain.Entities
         /// <summary>Last name</summary>
         public string? LastName { get; set; }
         /// <summary>Login email</summary>
-        public string? Email { get; set; }
-        /// <summary>Login password</summary>
         public string? Password { get; set; }
         /// <summary>User role</summary>
-        public UserRoleEnum Role { get; set; }
-        /// <summary>Create date</summary>
         public DateTime CreateDate { get; set; }
         /// <summary>Modified date</summary>
         public DateTime ModifiedDate { get; set; }
