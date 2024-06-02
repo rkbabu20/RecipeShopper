@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RecipeShopper.Api.Controllers.Base;
-using RecipeShopper.Api.Controllers.Requests;
+using RecipeShopper.Api.Controllers.Requests.UserRequests;
 using RecipeShopper.CommandQuery.Commands.Users.AddUserCommand;
 using RecipeShopper.CommandQuery.Commands.Users.DeleteUserCommand;
 using RecipeShopper.CommandQuery.Commands.Users.UpdateUserCommand;
@@ -59,7 +59,6 @@ namespace RecipeShopper.Api.Controllers
         [HttpGet("{userId}")]
         public async Task<IActionResult> Get([FromRoute] string userId)
         {
-            // write logic to return user for specified email
             Guid userIdGuid = Guid.Empty;
             if (!Guid.TryParse(userId, out userIdGuid))
             {

@@ -1,6 +1,7 @@
 ﻿using RecipeShopper.Data.Contracts.BaseContracts;
 using RecipeShopper.Domain.Aggregates;
 using RecipeShopper.Domain.Aggregates.IngradientsAggregate;
+using RecipeShopper.Domain.Aggregates.UsersAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,15 @@ namespace RecipeShopper.Data.Contracts
     /// <summary>
     /// Ingradients Repository interface
     /// </summary>
-    public interface IIngradientsRepository : IGetAllAsync<StockIngradientsAggrigate>,ICreateUpdateAsyncRepository<StockIngradientsAggrigate>,IAsynRepository<GenericRequest,StockIngradientsAggrigate>;
+    public interface IStockIngradientsRepository : IGetAllAsync<StockIngradientsAggrigate>,ICreateUpdateAsyncRepository<StockIngradientsAggrigate>,IAsynRepository<GenericRequest,StockIngradientsAggrigate>
+    {
+        /// <summary>
+        /// Find StockIngradient by Name
+        /// </summary>
+        /// <param name="name">name</param>
+        /// <returns>UsersAggregate</returns>
+        Task<StockIngradientsAggrigate> GetByNameAsync(string name);
+
+        Task Patch(StockIngradientsAggrigate request);
+    }
 }

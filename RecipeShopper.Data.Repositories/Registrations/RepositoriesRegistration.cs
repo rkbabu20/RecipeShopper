@@ -27,7 +27,7 @@ namespace RecipeShopper.Data.Repositories.Registrations
                 serviceCollection.AddScoped<ICartRepository, CartRepository>();
                 serviceCollection.AddScoped<ILoginRepository, LoginRepository>();
                 serviceCollection.AddScoped<IOrdersRepository, OrdersRepository>();
-                serviceCollection.AddScoped<IIngradientsRepository, IngradientsRepository>();
+                serviceCollection.AddScoped<IStockIngradientsRepository, StockIngradientsRepository>();
             }
         }
     }

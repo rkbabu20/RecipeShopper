@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using RecipeShopper.CommandQuery.Base;
+using RecipeShopper.CommandQuery.Extensions;
 using RecipeShopper.CommandQuery.Quaries.Users.AllUsersQuery;
 using RecipeShopper.Data.Contracts;
 using RecipeShopper.Domain.Aggregates;
@@ -45,7 +46,7 @@ namespace RecipeShopper.CommandQuery.Quaries.Users.GetUserQuery
             {
                 // Step 1 : Validate request
                 await Validate(request, response).ConfigureAwait(false);
-                if (response.Status == Enums.StatusTypeEnum.Success)
+                if (response.IsValid())
                 {
                     // Step 2 : Get user 
                     var usersAggregate = await _repositories.UsersRepository.GetAsync(_mapper.Map<GenericRequest>(request));

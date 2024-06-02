@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using RecipeShopper.Api.Controllers.Requests.Base;
 
-namespace RecipeShopper.Api.Controllers.Requests
+namespace RecipeShopper.Api.Controllers.Requests.UserRequests
 {
     /// <summary>
     /// Add user request

@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.VisualBasic;
 using RecipeShopper.CommandQuery.Base;
+using RecipeShopper.CommandQuery.Extensions;
 using RecipeShopper.Data.Contracts;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,7 @@ namespace RecipeShopper.CommandQuery.Quaries.Users.AllUsersQuery
             {
                 // Step 1 : Validate
                 await Validate(request, response).ConfigureAwait(false);
-                if (response.Status == Enums.StatusTypeEnum.Success)
+                if (response.IsValid())
                 {
                     // Step 2: Get all users
                     var usersAggregate = await _repositories.UsersRepository.GetAllAsync().ConfigureAwait(false);

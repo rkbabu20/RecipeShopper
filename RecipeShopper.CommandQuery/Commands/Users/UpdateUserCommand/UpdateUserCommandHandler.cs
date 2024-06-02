@@ -3,6 +3,7 @@ using MediatR;
 using RecipeShopper.CommandQuery.Base;
 using RecipeShopper.CommandQuery.Commands.Users.AddUserCommand;
 using RecipeShopper.CommandQuery.Commands.Users.DeleteUserCommand;
+using RecipeShopper.CommandQuery.Extensions;
 using RecipeShopper.Data.Contracts;
 using RecipeShopper.Domain.Aggregates.UsersAggregate;
 using RecipeShopper.Domain.Entities;
@@ -34,7 +35,7 @@ namespace RecipeShopper.CommandQuery.Commands.Users.UpdateUserCommand
             {
                 // Step 1 : Validate the request
                 await Validate(request, response).ConfigureAwait(false);
-                if (response.Status == Enums.StatusTypeEnum.Success)
+                if (response.IsValid())
                 {
                     // Step 2 : Check if user exists to update 
                     UsersAggregate aggregate = new UsersAggregate(_mapper.Map<User>(request.User));

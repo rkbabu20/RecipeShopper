@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Ingradients\" />
     <Folder Include="Commands\Cart\" />
     <Folder Include="Commands\Login\" />
     <Folder Include="Commands\Orders\" />

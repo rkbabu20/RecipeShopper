@@ -1,4 +1,5 @@
-﻿using RecipeShopper.Domain.Entities;
+﻿using RecipeShopper.Domain.Aggregates.Base;
+using RecipeShopper.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace RecipeShopper.Domain.Aggregates.IngradientsAggregate
     /// <summary>
     /// Ingradient aggregate
     /// </summary>
-    public class StockIngradientsAggrigate
+    public class StockIngradientsAggrigate : BaseAggregate
     {
         #region constructor
         /// <summary>
@@ -27,7 +28,7 @@ namespace RecipeShopper.Domain.Aggregates.IngradientsAggregate
         /// <param name="stockIngradient"></param>
         public StockIngradientsAggrigate(StockIngradient stockIngradient)
         {
-           StockIngradient = stockIngradient; ;
+           StockIngradient = stockIngradient;
         }
         #endregion
 
