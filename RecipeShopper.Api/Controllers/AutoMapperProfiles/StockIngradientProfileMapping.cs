@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using RecipeShopper.Api.Controllers.Requests.StockIngradientsRequests;
-using RecipeShopper.CommandQuery.Commands.StockIngradients.AddStockIngradientCommand;
-using RecipeShopper.CommandQuery.Commands.StockIngradients.PatchStockIngradientCommand;
-using RecipeShopper.CommandQuery.Commands.StockIngradients.UpdateStockIngradientCommand;
-using RecipeShopper.CommandQuery.DTOs;
+using RecipeShopper.Application.Services.DTOs;
+using RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.Commands.PatchStockIngradientCommand;
 
 namespace RecipeShopper.Api.Controllers.AutoMapperProfiles
 {

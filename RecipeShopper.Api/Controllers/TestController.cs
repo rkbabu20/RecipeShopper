@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RecipeShopper.CommandQuery.Quaries.Users.AllUsersQuery;
-
 namespace RecipeShopper.Api.Controllers
 {
     public class TestController : ControllerBase

@@ -1,4 +1,4 @@
-﻿using RecipeShopper.Data.Contracts;
+﻿using RecipeShopper.Application.Contracts;
 using RecipeShopper.Domain.Aggregates;
 using RecipeShopper.Domain.Aggregates.CartAggregate;
 using System;

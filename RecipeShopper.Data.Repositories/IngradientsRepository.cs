@@ -1,6 +1,6 @@
 ﻿using Azure.Core;
 using Microsoft.EntityFrameworkCore;
-using RecipeShopper.Data.Contracts;
+using RecipeShopper.Application.Contracts;
 using RecipeShopper.DBContexts.DatabaseContext;
 using RecipeShopper.Domain.Aggregates;
 using RecipeShopper.Domain.Aggregates.IngradientsAggregate;

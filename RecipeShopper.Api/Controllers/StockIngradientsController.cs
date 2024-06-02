@@ -3,17 +3,13 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RecipeShopper.Api.Controllers.Base;
 using RecipeShopper.Api.Controllers.Requests.StockIngradientsRequests;
-using RecipeShopper.CommandQuery.Commands.StockIngradients.AddStockIngradientCommand;
-using RecipeShopper.CommandQuery.Commands.StockIngradients.DeleteStockIngradientCommand;
-using RecipeShopper.CommandQuery.Commands.StockIngradients.PatchStockIngradientCommand;
-using RecipeShopper.CommandQuery.Commands.StockIngradients.UpdateStockIngradientCommand;
-using RecipeShopper.CommandQuery.Commands.Users.AddUserCommand;
-using RecipeShopper.CommandQuery.Commands.Users.DeleteUserCommand;
-using RecipeShopper.CommandQuery.Commands.Users.UpdateUserCommand;
-using RecipeShopper.CommandQuery.DTOs;
-using RecipeShopper.CommandQuery.Quaries.StockIngradients.AllStockIngradients;
-using RecipeShopper.CommandQuery.Quaries.StockIngradients.GetStockIngradient;
-using RecipeShopper.CommandQuery.Quaries.Users.GetUserQuery;
+using RecipeShopper.Application.Services.DTOs;
+using RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.Commands.AddStockIngradientCommand;
+using RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.Commands.DeleteStockIngradientCommand;
+using RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.Commands.PatchStockIngradientCommand;
+using RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.Commands.UpdateStockIngradientCommand;
+using RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.Quaries.AllStockIngradients;
+using RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.Quaries.GetStockIngradient;
 using RecipeShopper.Domain.Entities;
 
 namespace RecipeShopper.Api.Controllers

@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using RecipeShopper.Data.Contracts;
+using RecipeShopper.Application.Contracts;
 using RecipeShopper.Data.Repositories;
 using System;
 using System.Collections.Generic;

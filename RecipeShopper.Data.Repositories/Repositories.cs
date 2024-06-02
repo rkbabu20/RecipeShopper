@@ -1,4 +1,4 @@
-﻿using RecipeShopper.Data.Contracts;
+﻿using RecipeShopper.Application.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
