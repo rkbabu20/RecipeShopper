@@ -11,7 +11,7 @@ namespace RecipeShopper.Domain.Entities
     /// <summary>
     /// User entity
     /// </summary>
-    public class User 
+    public class User : IdentityUser
     {
         /// <summary>User Id</summary>
         public Guid UserId { get; set; }

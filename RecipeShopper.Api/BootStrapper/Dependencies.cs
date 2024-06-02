@@ -26,7 +26,7 @@ namespace RecipeShopper.Api.BootStrapper
                 builder.Services.RegisterMediatR();
                 builder.Services.RegisterDbContext(builder.Configuration);
                 builder.Services.RegisterRepositories();
-                builder.Services.RegisterIAMDbContext(builder.Configuration);
+               // builder.Services.RegisterIAMDbContext(builder.Configuration);
                 // Add services to the container.
                 builder.Services.AddControllers().AddJsonOptions(options => { options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); });
                 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

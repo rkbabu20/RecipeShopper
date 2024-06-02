@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RecipeShopper.DBContexts.DatabaseContext;
-using RecipeShopper.DBContexts.IdentityContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +16,7 @@ namespace RecipeShopper.DBContexts.Registrations
     public static class DbContextRegistrations
     {
         #region Constants
-        const string CONNECTION_STRING_KEY = "MS_SQL_SERVER_2019";
+        const string CONNECTION_STRING_KEY = "POC_MS_SQL_SERVER_2019";
         #endregion
 
         /// <summary>
@@ -29,17 +28,6 @@ namespace RecipeShopper.DBContexts.Registrations
         {
             var connectionString = configuration.GetConnectionString(CONNECTION_STRING_KEY);
             services.AddDbContext<RecipeShopperDbContext>(options => options.UseSqlServer(connectionString));
-        }
-
-        /// <summary>
-        /// Register db context
-        /// </summary>
-        /// <param name="services">Service collection</param>
-        /// <param name="configuration">Applicatoin configuration</param>
-        public static void RegisterIAMDbContext(this IServiceCollection services, IConfiguration configuration)
-        {
-            var connectionString = configuration.GetConnectionString(CONNECTION_STRING_KEY);
-            services.AddDbContext<RecipeShopperIAMDbContext>(options => options.UseSqlServer(connectionString));
         }
     }
 }

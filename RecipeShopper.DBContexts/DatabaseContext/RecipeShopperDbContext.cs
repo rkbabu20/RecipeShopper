@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using RecipeShopper.Domain.Entities;
 using RecipeShopper.Domain.Entities.Base;
 using System;
@@ -12,7 +14,7 @@ namespace RecipeShopper.DBContexts.DatabaseContext
     /// <summary>
     /// Recipe shopper data base context 
     /// </summary>
-    public class RecipeShopperDbContext : DbContext
+    public class RecipeShopperDbContext : IdentityDbContext<User>
     {
         /// <summary>
         /// Recipe shopper db context
@@ -20,10 +22,21 @@ namespace RecipeShopper.DBContexts.DatabaseContext
         /// <param name="options"></param>
         public RecipeShopperDbContext(DbContextOptions<RecipeShopperDbContext> options) : base(options) { }
 
+        /// <summary>
+        /// On model creating 
+        /// </summary>
+        /// <param name="builder"></param>
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<User>(entity => { entity.ToTable(name: "AspNetUsers"); });
+        }
+
+
 
         #region Properties
         /// <summary>User table</summary>
-        public virtual DbSet<User> Users { get; set; }
+        //public virtual DbSet<User> Users { get; set; }
         /// <summary>Cart table</summary>
         public virtual DbSet<Cart> Cart { get; set; }
         /// <summary>Ingradient table</summary>
