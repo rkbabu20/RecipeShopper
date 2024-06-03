@@ -17,24 +17,18 @@ namespace RecipeShopper.Api.Controllers
     /// <summary>
     /// User controller
     /// </summary>
-    public class UserController : BaseController
+    /// <remarks>
+    /// Constructor
+    /// </remarks>
+    /// <param name="mediator">IMediator</param>
+    /// <param name="mapper">IMapper</param>
+
+    public class UserController(IMediator mediator, IMapper mapper) : BaseController
     {
         #region private variables
-        private readonly IMediator _mediator = null;
-        private readonly IMapper _mapper = null;
-        #endregion
+        private readonly IMediator _mediator = mediator;
+        private readonly IMapper _mapper = mapper;
 
-        #region Constructor
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="mediator">IMediator</param>
-        /// <param name="mapper">IMapper</param>
-        public UserController(IMediator mediator, IMapper mapper)
-        {
-            _mediator = mediator;
-            _mapper = mapper;
-        }// UserController
         #endregion
 
         #region Controller methods
@@ -42,6 +36,7 @@ namespace RecipeShopper.Api.Controllers
         /// Get all users
         /// </summary>
         /// <returns></returns>
+        [Authorize]
         [HttpGet("getall")]
         public async Task<IActionResult> GetAllUsers()
         {
@@ -56,6 +51,7 @@ namespace RecipeShopper.Api.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
+        [Authorize]
         [HttpGet("{userId}")]
         public async Task<IActionResult> Get([FromRoute] string userId)
         {
@@ -70,6 +66,7 @@ namespace RecipeShopper.Api.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
+        [Authorize]
         [HttpDelete("{userId}")]
         public async Task<IActionResult> Delete([FromRoute] string userId)
         {
@@ -83,7 +80,7 @@ namespace RecipeShopper.Api.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost("add")]
+        [HttpPost("register")]
         public async Task<IActionResult> Add([FromBody] UserAddRequest request)
         {
             // Add user
@@ -93,18 +90,18 @@ namespace RecipeShopper.Api.Controllers
             return GetObjectResult(result);
         }
 
-        /// <summary>
-        /// Add user
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        [HttpPut("upate")]
-        public async Task<IActionResult> Update([FromBody] UserUpdateRequest updateRequest)
-        {
-            var user = _mapper.Map<UserDTO>(updateRequest);
-            var result = await _mediator.Send(new UpdateUserCommand(user));
-            return GetObjectResult(result);
-        }
+        ///// <summary>
+        ///// Add user
+        ///// </summary>
+        ///// <param name="request"></param>
+        ///// <returns></returns>
+        //[HttpPut("upate")]
+        //public async Task<IActionResult> Update([FromBody] UserUpdateRequest updateRequest)
+        //{
+        //    var user = _mapper.Map<UserDTO>(updateRequest);
+        //    var result = await _mediator.Send(new UpdateUserCommand(user));
+        //    return GetObjectResult(result);
+        //}
         #endregion
     }
 }

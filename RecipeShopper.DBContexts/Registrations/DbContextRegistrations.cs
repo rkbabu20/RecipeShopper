@@ -16,7 +16,7 @@ namespace RecipeShopper.DBContexts.Registrations
     public static class DbContextRegistrations
     {
         #region Constants
-        const string CONNECTION_STRING_KEY = "POC_MS_SQL_SERVER_2019";
+        const string CONNECTION_STRING_KEY = "MS_SQL_SERVER_2019";
         #endregion
 
         /// <summary>

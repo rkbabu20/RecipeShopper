@@ -40,7 +40,8 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Commands.Ad
                 if (response.IsValid())
                 {
                     // Step 2 : Add user
-                    UsersAggregate aggregate = new UsersAggregate(_mapper.Map<User>(request.User));
+                    var user = _mapper.Map<User>(request.User);
+                    UsersAggregate aggregate = new UsersAggregate(new RegisterUser(user, request.User.Password!));
                     await _repositories.UsersRepository.AddAsync(aggregate).ConfigureAwait(false);
 
                     // Step 3 : Check if user really added
@@ -53,15 +54,25 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Commands.Ad
             return response;
         }
 
+        /// <summary>
+        /// Validate user input
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="response"></param>
+        /// <returns></returns>
         protected async override Task Validate(AddUserCommand request, AddUserCommandResponse response)
         {
             if (request == null) { base.HandleMessage(response, "Request cannot be null", Enums.MessageTypeEnum.ValidationError); }
             else if (request.User == null) { base.HandleMessage(response, "User cannot be be null.", Enums.MessageTypeEnum.ValidationError); }
             else
             {
-                var userAggregate = await _repositories.UsersRepository.GetUserByEmailAsync(request.User.Email);
-                if (userAggregate != null && userAggregate.User != null)
+                if (string.IsNullOrWhiteSpace(request.User.FirstName)) { base.HandleMessage(response, "User first name is missing.", Enums.MessageTypeEnum.ValidationError); }
+                if (string.IsNullOrWhiteSpace(request.User.LastName)) { base.HandleMessage(response, "User last name is missing.", Enums.MessageTypeEnum.ValidationError); }
+                if (string.IsNullOrWhiteSpace(request.User.Email)) { base.HandleMessage(response, "User email is missing.", Enums.MessageTypeEnum.ValidationError); }
+                else if ((await _repositories.UsersRepository.GetUserByEmailAsync(request.User.Email).ConfigureAwait(false)).User != null)
                     base.HandleMessage(response, $"User already exists with the given email {request.User.Email}.", Enums.MessageTypeEnum.ValidationError);
+                if (string.IsNullOrWhiteSpace(request.User.Password)) { base.HandleMessage(response, "User password is missing.", Enums.MessageTypeEnum.ValidationError); }
+                if (request.User.Role == Enums.UserRoleEnum.Unspecified) { base.HandleMessage(response, "User role is missing.", Enums.MessageTypeEnum.ValidationError); }
             }
         }
         #endregion

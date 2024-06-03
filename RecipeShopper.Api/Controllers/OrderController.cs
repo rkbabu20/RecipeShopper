@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RecipeShopper.Api.Controllers.Base;
 using RecipeShopper.Api.Controllers.Requests;
 
 namespace RecipeShopper.Api.Controllers
 {
+    [Authorize]
     public class OrderController : BaseController
     {
         /// <summary>
@@ -18,26 +20,26 @@ namespace RecipeShopper.Api.Controllers
             return Ok(result);
         }
 
-        /// <summary>
-        /// Get specific Order
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        [HttpGet("{orderId}")]
-        public async Task<IActionResult> Get([FromRoute] string orderId)
-        {
-            // Get specific order
-            var result = new { IsSuucess = "true", Message = "Order retrieved" };
-            return Ok(result);
-        }
+        ///// <summary>
+        ///// Get specific Order
+        ///// </summary>
+        ///// <param name="request"></param>
+        ///// <returns></returns>
+        //[HttpGet("{orderId}")]
+        //public async Task<IActionResult> Get([FromRoute] string orderId)
+        //{
+        //    // Get specific order
+        //    var result = new { IsSuucess = "true", Message = "Order retrieved" };
+        //    return Ok(result);
+        //}
 
         /// <summary>
         /// Submit order
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost("submit")]
-        public async Task<IActionResult> Submit()
+        [HttpPost("{userId}/submit")]
+        public async Task<IActionResult> Submit([FromRoute] string userId)
         {
             // Submit order logic
             var result = new { IsSuucess = "true", Message = "Order submitted" };

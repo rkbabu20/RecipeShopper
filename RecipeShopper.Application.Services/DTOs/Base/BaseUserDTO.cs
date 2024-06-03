@@ -17,5 +17,8 @@ namespace RecipeShopper.Application.Services.DTOs.Base
         public string? LastName { get; set; }
         /// <summary>Login email</summary>
         public string? Email { get; set; }
+
+        /// <summary>User Role</summary>
+        public UserRoleEnum Role { get; set; }
     }
 }

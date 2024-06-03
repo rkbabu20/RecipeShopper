@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RecipeShopper.Api.Controllers.Base;
 using RecipeShopper.Api.Controllers.Requests.StockIngradientsRequests;
@@ -14,24 +15,18 @@ using RecipeShopper.Domain.Entities;
 
 namespace RecipeShopper.Api.Controllers
 {
-    public class StockIngradientsController : BaseController
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="mediator">IMediator</param>
+    /// <param name="mapper">IMapper</param>
+    [Authorize]
+    public class StockIngradientsController(IMediator mediator, IMapper mapper) : BaseController
     {
         #region private variables
-        private readonly IMediator _mediator = null;
-        private readonly IMapper _mapper = null;
-        #endregion
+        private readonly IMediator _mediator = mediator;
+        private readonly IMapper _mapper = mapper;
 
-        #region Constructor
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="mediator">IMediator</param>
-        /// <param name="mapper">IMapper</param>
-        public StockIngradientsController(IMediator mediator, IMapper mapper)
-        {
-            _mediator = mediator;
-            _mapper = mapper;
-        }// UserController
         #endregion
 
         /// <summary>

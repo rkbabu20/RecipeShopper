@@ -34,9 +34,19 @@ namespace RecipeShopper.Domain.Aggregates.UsersAggregate
         {
             User = user;
         }
-        #endregion
 
+        /// <summary>
+        /// User registration
+        /// </summary>
+        /// <param name="userRegistration">RegisterUser</param>
+        public UsersAggregate(RegisterUser userRegistration)
+        {
+            RegisterUser = userRegistration;
+        }
+        #endregion
+        
         #region Users
+        public RegisterUser RegisterUser { get; private set; }
         /// <summary>Users</summary>
         public List<User>? Users { get; private set; }
 

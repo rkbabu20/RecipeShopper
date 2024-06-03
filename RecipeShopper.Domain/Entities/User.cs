@@ -17,5 +17,7 @@ namespace RecipeShopper.Domain.Entities
         public string? FirstName { get; set; }
         /// <summary>Last name</summary>
         public string? LastName { get; set; }
+        /// <summary>User Role</summary>
+        public UserRoleEnum Role { get; set; }
     }// End user
 }// End namespace

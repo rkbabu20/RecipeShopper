@@ -12,7 +12,7 @@ using RecipeShopper.DBContexts.DatabaseContext;
 namespace RecipeShopper.DBContexts.Migrations
 {
     [DbContext(typeof(RecipeShopperDbContext))]
-    [Migration("20240602210032_initial")]
+    [Migration("20240603035813_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -173,6 +173,9 @@ namespace RecipeShopper.DBContexts.Migrations
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -204,6 +207,9 @@ namespace RecipeShopper.DBContexts.Migrations
                     b.Property<int>("OrderedQuantity")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("PricePerQuantity")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("QuantityType")
                         .HasColumnType("int");
 
@@ -218,28 +224,6 @@ namespace RecipeShopper.DBContexts.Migrations
                     b.HasIndex("RecipeId");
 
                     b.ToTable("CartIngradients");
-                });
-
-            modelBuilder.Entity("RecipeShopper.Domain.Entities.Login", b =>
-                {
-                    b.Property<Guid>("LoginId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("LoginId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Login");
                 });
 
             modelBuilder.Entity("RecipeShopper.Domain.Entities.Order", b =>
@@ -315,6 +299,9 @@ namespace RecipeShopper.DBContexts.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("PricePerQuantity")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("QuantityType")
                         .HasColumnType("int");
 
@@ -370,6 +357,9 @@ namespace RecipeShopper.DBContexts.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -459,15 +449,6 @@ namespace RecipeShopper.DBContexts.Migrations
                     b.HasOne("RecipeShopper.Domain.Entities.Recipe", null)
                         .WithMany("Ingradients")
                         .HasForeignKey("RecipeId");
-                });
-
-            modelBuilder.Entity("RecipeShopper.Domain.Entities.Login", b =>
-                {
-                    b.HasOne("RecipeShopper.Domain.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("RecipeShopper.Domain.Entities.Order", b =>

@@ -31,7 +31,17 @@ namespace RecipeShopper.Application.Services.MapperProfiles
                .IncludeAllDerived()
                .ReverseMap();
 
-            CreateMap<User, UserDTO>().ReverseMap();
+            // User DTO mapping
+            CreateMap<User, UserDTO>()
+                .ForMember(dest=>dest.Id,opt=>opt.MapFrom(src=>src.Id))
+                .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
+                .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+                .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.PasswordHash))
+                .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.UserName))
+                .ReverseMap();
+
             CreateMap<User, ViewUserDTO>().ReverseMap();
             CreateMap<DomainEnum.UserRoleEnum, CommandQuiriesEums.UserRoleEnum>().ReverseMap();
         }

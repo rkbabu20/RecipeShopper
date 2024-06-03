@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RecipeShopper.Api.Controllers.Base;
-using RecipeShopper.Api.Controllers.Requests;
+using RecipeShopper.Api.Controllers.Requests.CartRequests;
 
 namespace RecipeShopper.Api.Controllers
 {
+    [Authorize]
     public class CartController : BaseController
     {
 
@@ -45,18 +47,43 @@ namespace RecipeShopper.Api.Controllers
             var result = new { IsSuucess = "true", Message = "Ingradient added" };
             return Ok(result);
         }
-
         /// <summary>
-        /// Update cart
+        /// Add ingradients to cart
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost("upate")]
-        public async Task<IActionResult> Update([FromBody] CartUpdateRequest request)
+        [HttpPost("{cartId}/cart/recipe")]
+        public async Task<IActionResult> AddRecipe([FromBody] CartAddRequest request)
         {
-            // Update whole cart
-            var result = new { IsSuucess = "true", Message = "Ingradient updated" };
+            // Add ingradients to cart
+            var result = new { IsSuucess = "true", Message = "Ingradient added" };
             return Ok(result);
         }
+
+        /// <summary>
+        /// Add ingradients to cart
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost("{cartId}/cart/{recipeId}/recipe/ingradient")]
+        public async Task<IActionResult> AddIngradient([FromBody] CartAddRequest request)
+        {
+            // Add ingradients to cart
+            var result = new { IsSuucess = "true", Message = "Ingradient added" };
+            return Ok(result);
+        }
+
+        ///// <summary>
+        ///// Update cart
+        ///// </summary>
+        ///// <param name="request"></param>
+        ///// <returns></returns>
+        //[HttpPost("upate")]
+        //public async Task<IActionResult> Update([FromBody] CartUpdateRequest request)
+        //{
+        //    // Update whole cart
+        //    var result = new { IsSuucess = "true", Message = "Ingradient updated" };
+        //    return Ok(result);
+        //}
     }
 }

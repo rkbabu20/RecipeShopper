@@ -17,6 +17,9 @@ namespace RecipeShopper.Domain.Entities
         public User? User { get; set; }
         /// <summary>Recipes</summary>
         public List<Recipe>? Recipes { get; set; }
+
+        public decimal TotalPrice { get; set; }
+
         /// <summary>Is order submission complete</summary>
         public bool IsOrderComplete { get; set; }
     }

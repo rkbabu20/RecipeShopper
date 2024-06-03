@@ -10,7 +10,6 @@
     <Folder Include="FunctionalFeature\Cart\Commands\" />
     <Folder Include="FunctionalFeature\Cart\Quaries\" />
     <Folder Include="FunctionalFeature\Login\Commands\" />
-    <Folder Include="FunctionalFeature\Login\Quaries\" />
     <Folder Include="FunctionalFeature\Orders\Commands\" />
     <Folder Include="FunctionalFeature\Orders\Quaries\" />
   </ItemGroup>

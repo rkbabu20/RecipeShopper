@@ -15,6 +15,9 @@ namespace RecipeShopper.Domain.Entities.Base
     {
         /// <summary>In gradient name</summary>
         public string? Name { get; set; }
+
+        public decimal PricePerQuantity { get; set; }
+
         /// <summary>Ingradient description</summary>
         public string? Description { get; set; }
 

@@ -9,13 +9,12 @@ namespace RecipeShopper.Domain.Entities
     /// <summary>
     /// Login
     /// </summary>
-    public class Login : DataProperties
+    public class Login
     {
-        public Login() { }
-        /// <summary>Login id</summary>
-        public Guid LoginId { get; set; }
-        /// <summary>User</summary>
-        public User User { get; set; }
+        /// <summary>Email</summary>
+        public string?  Email { get; set; }
+        /// <summary>Password</summary>
+        public string? Password { get; set; }
 
     }
 }

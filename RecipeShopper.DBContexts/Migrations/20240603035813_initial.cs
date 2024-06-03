@@ -32,6 +32,7 @@ namespace RecipeShopper.DBContexts.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Role = table.Column<int>(type: "int", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -61,6 +62,7 @@ namespace RecipeShopper.DBContexts.Migrations
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PricePerQuantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     QuantityType = table.Column<int>(type: "int", nullable: false)
                 },
@@ -181,6 +183,7 @@ namespace RecipeShopper.DBContexts.Migrations
                 {
                     CartId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IsOrderComplete = table.Column<bool>(type: "bit", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -190,25 +193,6 @@ namespace RecipeShopper.DBContexts.Migrations
                     table.PrimaryKey("PK_Cart", x => x.CartId);
                     table.ForeignKey(
                         name: "FK_Cart_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Login",
-                columns: table => new
-                {
-                    LoginId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Login", x => x.LoginId);
-                    table.ForeignKey(
-                        name: "FK_Login_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
@@ -270,6 +254,7 @@ namespace RecipeShopper.DBContexts.Migrations
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PricePerQuantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     QuantityType = table.Column<int>(type: "int", nullable: false)
                 },
@@ -333,11 +318,6 @@ namespace RecipeShopper.DBContexts.Migrations
                 column: "RecipeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Login_UserId",
-                table: "Login",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Orders_UserId",
                 table: "Orders",
                 column: "UserId");
@@ -373,9 +353,6 @@ namespace RecipeShopper.DBContexts.Migrations
 
             migrationBuilder.DropTable(
                 name: "CartIngradients");
-
-            migrationBuilder.DropTable(
-                name: "Login");
 
             migrationBuilder.DropTable(
                 name: "StockIngradients");

@@ -10,7 +10,7 @@ namespace RecipeShopper.Api.Controllers.Base
     /// Base api controller for base
     /// </summary>
     [ApiController]
-    //[Authorize]
+   
     [Produces("application/json")]
     [Route("[controller]")]
     public class BaseController : ControllerBase
