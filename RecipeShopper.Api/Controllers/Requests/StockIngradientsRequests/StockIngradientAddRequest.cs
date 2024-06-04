@@ -4,5 +4,6 @@ namespace RecipeShopper.Api.Controllers.Requests.StockIngradientsRequests
 {
     public class StockIngradientAddRequest : BaseIngradient
     {
+        public int AvailableQuantity { get; set; }
     }
 }

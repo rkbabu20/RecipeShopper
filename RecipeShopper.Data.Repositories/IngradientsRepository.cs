@@ -17,22 +17,15 @@ namespace RecipeShopper.Data.Repositories
     /// <summary>
     /// Ingradient repository
     /// </summary>
-    public class StockIngradientsRepository : IStockIngradientsRepository
+    /// <remarks>
+    /// User repository
+    /// </remarks>
+    /// <param name="dbContext">dbcontext</param>
+    public class StockIngradientsRepository(RecipeShopperDbContext dbContext) : IStockIngradientsRepository
     {
 
         #region Private variables
-        RecipeShopperDbContext _dbContext = null;
-        #endregion
-
-        #region Constructor
-        /// <summary>
-        /// User repository
-        /// </summary>
-        /// <param name="dbContext">dbcontext</param>
-        public StockIngradientsRepository(RecipeShopperDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+        RecipeShopperDbContext _dbContext = dbContext;
         #endregion
 
         public async Task AddAsync(StockIngradientsAggrigate request)

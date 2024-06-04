@@ -13,7 +13,15 @@ namespace RecipeShopper.Domain.Aggregates.CartAggregate
     /// </summary>
     public class CartAggregate : BaseAggregate
     {
+        #region Constructor
         public CartAggregate(Cart cart) { Cart = cart; }
+        public CartAggregate(CartIngradient cartIngradient) { CartIngradient = cartIngradient; }
+        public CartAggregate(Recipe recipe) { Recipe = recipe; }
+        #endregion
+
         public Cart Cart { get; set; }
+        public CartIngradient CartIngradient { get; set; }
+        public Recipe Recipe { get; set; }
+        public bool IsCartExists { get; set; }
     }
 }

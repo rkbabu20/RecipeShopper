@@ -17,21 +17,13 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.
     /// <summary>
     /// AddStockIngradientCommand handler
     /// </summary>
-    public class AddStockIngradientCommandHandler
-        : BaseHandler<AddStockIngradientCommand, AddStockIngradientCommandResponse>,
+    public class AddStockIngradientCommandHandler(IRepositories repositories, IMapper mapper)
+                : BaseHandler<AddStockIngradientCommand, AddStockIngradientCommandResponse>,
         IRequestHandler<AddStockIngradientCommand, AddStockIngradientCommandResponse>
     {
         #region Private variables
-        private readonly IRepositories _repositories = null;
-        private readonly IMapper _mapper = null;
-        #endregion
-
-        #region Constructor
-        public AddStockIngradientCommandHandler(IRepositories repositories, IMapper mapper)
-        {
-            _repositories = repositories;
-            _mapper = mapper;
-        }
+        private readonly IRepositories _repositories = repositories;
+        private readonly IMapper _mapper = mapper;
         #endregion
 
         #region Interface methods

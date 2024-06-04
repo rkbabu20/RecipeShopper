@@ -7,11 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="FunctionalFeature\Cart\Commands\" />
-    <Folder Include="FunctionalFeature\Cart\Quaries\" />
     <Folder Include="FunctionalFeature\Login\Commands\" />
-    <Folder Include="FunctionalFeature\Orders\Commands\" />
-    <Folder Include="FunctionalFeature\Orders\Quaries\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />

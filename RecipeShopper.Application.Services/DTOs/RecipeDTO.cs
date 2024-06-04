@@ -11,8 +11,8 @@ namespace RecipeShopper.Application.Services.DTOs
         /// <summary>Recipe id</summary>
         public Guid Id { get; set; }
         /// <summary>Recipe name</summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
         /// <summary>Ingradients</summary>
-        public List<StockIngradientDTO> Ingradients { get; set;}
+        public List<CartIngradientDTO>? Ingradients { get; set;}
     }
 }

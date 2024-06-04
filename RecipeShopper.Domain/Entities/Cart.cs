@@ -11,6 +11,7 @@ namespace RecipeShopper.Domain.Entities
     /// </summary>
     public class Cart : DataProperties
     {
+        public Cart() { Recipes = new List<Recipe>(); }
         /// <summary>Cart id</summary>
         public Guid CartId { get; set; }
         /// <summary>User</summary>

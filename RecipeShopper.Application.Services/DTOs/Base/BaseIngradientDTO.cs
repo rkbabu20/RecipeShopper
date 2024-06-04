@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace RecipeShopper.Application.Services.DTOs.Base
 {
+    /// <summary>
+    /// Base ingradient dto
+    /// </summary>
     public class BaseIngradientDTO
     {
         /// <summary>In gradient name</summary>
