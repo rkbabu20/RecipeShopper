@@ -43,4 +43,4 @@ Download the latest docker image for ms sql server 2019
 8. update-database [Wait for the scripts to complete]. Once completed then refresh your sql server 2019 DB instances. You should see RecipeShopperDB instance up and running.
 9. Run the visual studio solution whcih will open up swagger
 10. Use /api/User/register to register yourself to the portal.
-11. Use /api/Login/authenticate to login. to login use user name and password just created. Successful login provides you JWT bearer token. You can use it explore rest of the end points.
+11. Use /api/Login/authenticate to login. to login use user name and password just created. Successful login provides you JWT bearer token. You can use it to explore the rest of the end points.
