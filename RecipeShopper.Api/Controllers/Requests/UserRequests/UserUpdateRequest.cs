@@ -10,6 +10,6 @@ namespace RecipeShopper.Api.Controllers.Requests.UserRequests
         /// <summary>
         /// UserId
         /// </summary>
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
     }
 }

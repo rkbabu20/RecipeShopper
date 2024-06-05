@@ -10,9 +10,11 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Commands.De
     /// <summary>
     /// Get all users query
     /// </summary>
-    public class DeleteUserCommand : IRequest<DeleteUserCommandResponse>
+    public class DeleteUserCommand(string id) : IRequest<DeleteUserCommandResponse>
     {
-        public DeleteUserCommand(Guid userId) { this.UserId = userId; }
-        public Guid UserId { get; private set; }
+        /// <summary>
+        /// User id
+        /// </summary>
+        public string Id { get; private set; } = id;
     }
 }

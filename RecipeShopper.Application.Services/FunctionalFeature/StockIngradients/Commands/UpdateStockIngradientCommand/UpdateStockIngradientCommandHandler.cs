@@ -15,9 +15,9 @@ using System.Threading.Tasks;
 namespace RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.Commands.UpdateStockIngradientCommand
 {
     /// <summary>
-    /// Get Get users query handler
+    /// Upate stock ingradient command handler
     /// </summary>
-    public class DeleteUserCommandHandler
+    public class UpdateStockIngradientCommandHandler
         : BaseHandler<UpdateStockIngradientCommand, UpdateStockIngradientCommandResponse>,
         IRequestHandler<UpdateStockIngradientCommand, UpdateStockIngradientCommandResponse>
     {
@@ -27,7 +27,7 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.
         #endregion
 
         #region Constructor
-        public DeleteUserCommandHandler(IRepositories repositories, IMapper mapper)
+        public UpdateStockIngradientCommandHandler(IRepositories repositories, IMapper mapper)
         {
             _repositories = repositories;
             _mapper = mapper;

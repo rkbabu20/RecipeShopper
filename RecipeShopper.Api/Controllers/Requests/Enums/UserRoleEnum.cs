@@ -3,7 +3,7 @@
     /// <summary>
     /// User role
     /// </summary>
-    public enum UserRoleEnum
+    public enum CustomerUserRoleEnum
     {
         Unspecified,
         Admin,

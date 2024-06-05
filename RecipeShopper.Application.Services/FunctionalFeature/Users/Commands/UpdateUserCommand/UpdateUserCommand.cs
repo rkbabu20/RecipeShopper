@@ -15,6 +15,7 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Commands.Up
     public class UpdateUserCommand(UserDTO userDto)
         : IRequest<UpdateUserCommandResponse>
     {
+        /// <summary>User dto</summary>
         public UserDTO User { get; set; } = userDto;
     }
 }

@@ -14,7 +14,9 @@ namespace RecipeShopper.Domain.Entities
     {
         /// <summary>Ingradient id</summary>
         public Guid CartIngradientId { get; set; }
+        /// <summary>Stock ingradient id</summary>
         public Guid StockIngradientId {get; set;}
+        /// <summary>Ordered quantity</summary>
         public int OrderedQuantity { get; set; }
     }
 }

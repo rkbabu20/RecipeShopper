@@ -14,6 +14,7 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.
     {
         /// <summary>Stock ingradientId</summary>
         public Guid StockIngradientId { get; set; } = stockIngradientId;
+        /// <summary>Available quantity</summary>
         public int AvailableQuantity { get; set; } = availableQuantity;
     }
 }

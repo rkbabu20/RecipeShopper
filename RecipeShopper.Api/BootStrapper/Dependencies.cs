@@ -2,6 +2,7 @@
 using RecipeShopper.Application.Services.Registrations;
 using RecipeShopper.Data.Repositories.Registrations;
 using System.Text.Json.Serialization;
+using RecipeShopper.Application.Contracts.Configurations;
 
 namespace RecipeShopper.Api.BootStrapper
 {
@@ -22,17 +23,34 @@ namespace RecipeShopper.Api.BootStrapper
                 var assemblies = AppDomain.CurrentDomain.GetAssemblies();
                 // AutoMapper registration
                 builder.Services.AddAutoMapper(assemblies);
+
                 // MediateR registration - For CQRS
                 builder.Services.RegisterMediatR();
+                
+                // DbContext Registration
                 builder.Services.RegisterDbContext(builder.Configuration);
+                
+                // Repositories registration
                 builder.Services.RegisterRepositories();
-                builder.Services.RegisterIAMDbContext(builder.Configuration);
-                // Add services to the container.
-                builder.Services.AddControllers().AddJsonOptions(options => { options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); });
+                builder.Services.RegisterRepositoriesConfiguration();
+                
+                // Json conversions configurations
+                builder.Services.AddControllers().AddJsonOptions
+                    (
+                        options => 
+                            { 
+                                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); 
+                            }
+                    );
+
                 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
                 builder.Services.AddEndpointsApiExplorer();
+                
+                // Add authorization to swagger
                 builder.Services.AddAuthorizationToSwagger();
-                builder.Services.AddCustomAuthorization();
+
+                // Authentication registrations configuration
+                builder.Services.CustomAuthenticationRegistration(builder.Configuration);
             }
             return builder!;
         }

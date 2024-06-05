@@ -13,5 +13,6 @@ namespace RecipeShopper.Domain.Aggregates
     {
         /// <summary>Request id</summary>
         public Guid RequestId { get; set; }
+        public string Id { get; set; }
     }
 }

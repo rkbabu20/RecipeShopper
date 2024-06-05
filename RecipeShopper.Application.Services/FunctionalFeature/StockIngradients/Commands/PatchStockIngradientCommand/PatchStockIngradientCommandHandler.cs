@@ -73,10 +73,8 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.
         /// <param name="response"></param>
         protected async override Task Validate(PatchStockIngradientCommand request, PatchStockIngradientCommandResponse response)
         {
-            if (request == null)
-                HandleMessage(response, "Request cannot be null", Enums.MessageTypeEnum.ValidationError);
-            else if (request.StockIngradientId == Guid.Empty)
-                HandleMessage(response, $"Invalid user id passed {request.StockIngradientId}", Enums.MessageTypeEnum.ValidationError);
+            if (request == null) HandleMessage(response, "Request cannot be null", Enums.MessageTypeEnum.ValidationError);
+            else if (request.StockIngradientId == Guid.Empty) HandleMessage(response, $"Invalid user id passed {request.StockIngradientId}", Enums.MessageTypeEnum.ValidationError);
             else
             {
                 // Check if user exists to update

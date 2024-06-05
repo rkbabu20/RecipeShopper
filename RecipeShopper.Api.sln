@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{CEE221
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{58079B30-06E5-470B-A691-6568C2FC52A6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecipeShopper.Data", "RecipeShopper.Data\RecipeShopper.Data.csproj", "{570765AA-D6CE-46E1-8B77-58DEAF5C26AD}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecipeShopper.CommandQuery.UnitTests", "RecipeShopper.CommandQuery.UnitTests\RecipeShopper.CommandQuery.UnitTests.csproj", "{FA7F1509-A83B-4081-A195-82849D615CF0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecipeShopper.Domain.UnitTests", "RecipeShopper.Domain.UnitTests\RecipeShopper.Domain.UnitTests.csproj", "{83BB7CCE-6822-4E8D-9A0A-7B63AA27282A}"
@@ -29,9 +27,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{587D59E9-DE7B-4160-9C1A-B232847CF7A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeShopper.Application.Contracts", "RecipeShopper.Application.Contracts\RecipeShopper.Application.Contracts.csproj", "{45905408-01F2-4AA4-89B8-1D2C38BFE6F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecipeShopper.Application.Contracts", "RecipeShopper.Application.Contracts\RecipeShopper.Application.Contracts.csproj", "{45905408-01F2-4AA4-89B8-1D2C38BFE6F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeShopper.Application.Services", "RecipeShopper.Application.Services\RecipeShopper.Application.Services.csproj", "{0CA7256B-8B56-471F-81D1-CB68960D2455}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecipeShopper.Application.Services", "RecipeShopper.Application.Services\RecipeShopper.Application.Services.csproj", "{0CA7256B-8B56-471F-81D1-CB68960D2455}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +45,6 @@ Global
 		{6463453E-192A-4AEC-85CC-0299FFD13F4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6463453E-192A-4AEC-85CC-0299FFD13F4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6463453E-192A-4AEC-85CC-0299FFD13F4B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{570765AA-D6CE-46E1-8B77-58DEAF5C26AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{570765AA-D6CE-46E1-8B77-58DEAF5C26AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{570765AA-D6CE-46E1-8B77-58DEAF5C26AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{570765AA-D6CE-46E1-8B77-58DEAF5C26AD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FA7F1509-A83B-4081-A195-82849D615CF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FA7F1509-A83B-4081-A195-82849D615CF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA7F1509-A83B-4081-A195-82849D615CF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -82,7 +76,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{AB4A6146-36E1-4AF0-B0EC-B89225BB8001} = {ECA4ACA7-1D6E-403A-BC8B-FE1420D5D7F6}
 		{6463453E-192A-4AEC-85CC-0299FFD13F4B} = {36B48151-CB8C-417A-9558-8EBEE3FAB618}
-		{570765AA-D6CE-46E1-8B77-58DEAF5C26AD} = {587D59E9-DE7B-4160-9C1A-B232847CF7A5}
 		{FA7F1509-A83B-4081-A195-82849D615CF0} = {58079B30-06E5-470B-A691-6568C2FC52A6}
 		{83BB7CCE-6822-4E8D-9A0A-7B63AA27282A} = {58079B30-06E5-470B-A691-6568C2FC52A6}
 		{B4FF30C5-5BEE-4E23-873A-C187049AEC89} = {587D59E9-DE7B-4160-9C1A-B232847CF7A5}

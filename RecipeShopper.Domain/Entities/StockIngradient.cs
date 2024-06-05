@@ -12,7 +12,9 @@ namespace RecipeShopper.Domain.Entities
     /// </summary>
     public class StockIngradient : BaseIngradient
     {
+        /// <summary>Stock ingradient id</summary>
         public Guid StockIngradientId { get; set; }
+        /// <summary>Available quantity</summary>
         public int AvailableQuantity { get; set; }
     }
 }

@@ -13,9 +13,19 @@ namespace RecipeShopper.Domain.Entities
     {
         /// <summary>Order id</summary>
         public Guid OrderId { get; set; }
-        /// <summary>User</summary>
-        public User? User { get; set; }
-        /// <summary>Recipes</summary>
-        public List<Recipe>? Recipes { get; set; }
+
+        /// <summary>
+        /// String User Id
+        /// </summary>
+        public string UserId {  get; set; }
+        /// <summary>
+        /// Cart
+        /// </summary>
+        public Cart Cart { get; set; }
+        /// <summary>
+        /// Order Status
+        /// </summary>
+        public string OrderStatus { get; set; }
+
     }// Order
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RecipeShopper.Application.Contracts;
+using RecipeShopper.Application.Contracts.Configurations;
 using RecipeShopper.Data.Repositories;
+using RecipeShopper.Data.Repositories.Configurations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,9 +27,21 @@ namespace RecipeShopper.Data.Repositories.Registrations
                 serviceCollection.AddScoped<IRepositories, Repositories>();
                 serviceCollection.AddScoped<IUsersRepository, UsersRepository>();
                 serviceCollection.AddScoped<ICartRepository, CartRepository>();
-                serviceCollection.AddScoped<ILoginRepository, LoginRepository>();
                 serviceCollection.AddScoped<IOrdersRepository, OrdersRepository>();
                 serviceCollection.AddScoped<IStockIngradientsRepository, StockIngradientsRepository>();
+                serviceCollection.AddScoped<ILoginRepository, LoginRepository>();
+            }
+        }
+
+        /// <summary>
+        /// Register repositories
+        /// </summary>
+        /// <param name="serviceCollection"></param>
+        public static void RegisterRepositoriesConfiguration(this IServiceCollection serviceCollection)
+        {
+            if (serviceCollection != null)
+            {
+                serviceCollection.AddScoped<IJWTTokenConfiguration, JWTTokenConfiguration>();
             }
         }
     }

@@ -20,7 +20,11 @@ namespace RecipeShopper.Application.Services.Base
             Status = StatusTypeEnum.Success;
             Messages = new List<Message>();
         }
+        
+        /// <summary>Status</summary>
         public StatusTypeEnum Status { get; set; }
+
+        /// <summary>Messages</summary>
         public List<Message> Messages { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace RecipeShopper.Api.Controllers.AutoMapperProfiles
     public class StockIngradientProfileMapping : Profile
     {
         /// <summary>
-        /// Constructor
+        /// StockIngradientProfileMapping
         /// </summary>
         public StockIngradientProfileMapping()
         {

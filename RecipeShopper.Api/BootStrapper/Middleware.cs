@@ -22,11 +22,9 @@ namespace RecipeShopper.Api.BootStrapper
                 app.UseSwaggerUI();
             }
 
-            // Identity api mapping
-            app.MapIdentityApi<IdentityUser>();
-
             app.UseHttpsRedirection();
-
+            // Use Authentication
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();

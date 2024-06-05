@@ -15,8 +15,18 @@ namespace RecipeShopper.Api.BootStrapper
         {
             if (services != null)
             {
+                services.AddEndpointsApiExplorer();
+                
+                // Add swagger authorization to swagger 
                 services.AddSwaggerGen(options =>
                 {
+                    // Swagger documentation
+                    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo 
+                    { 
+                        Title = "Recipe Shopper Api", 
+                        Version = "",
+                        Description="<b>Recipe Shopper Api</b> is a web api for registering users, login, and build recipes to order."
+                    });
                     options.AddSecurityDefinition("oauth2", new Microsoft.OpenApi.Models.OpenApiSecurityScheme()
                     {
                         In = Microsoft.OpenApi.Models.ParameterLocation.Header,

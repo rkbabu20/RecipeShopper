@@ -13,6 +13,10 @@ namespace RecipeShopper.Application.Contracts
     /// <summary>
     /// Orders interface
     /// </summary>
-    public interface IOrdersRepository : IGetAllByRequestAsyncRepository<GenericRequest, OrdersAggregate>, ICreateUpdateAsyncRepository<OrdersAggregate>, IAsynRepository<GenericRequest, OrdersAggregate>;
+    public interface IOrdersRepository : IGetAllByRequestAsyncRepository<GenericRequest, OrdersAggregate>, IAsynRepository<GenericRequest, OrdersAggregate>
+    {
+        Task SubmitAsync(OrdersAggregate ordersAggregate);
+
+    }
 
 }

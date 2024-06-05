@@ -49,9 +49,9 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Commands.De
                 if (response.IsValid())
                 {
                     // Step 2: Delete the user from db
-                    await _repositories.UsersRepository.DeleteAsync(new Domain.Aggregates.GenericRequest() { RequestId = request.UserId }).ConfigureAwait(false);
+                    await _repositories.UsersRepository.DeleteAsync(new Domain.Aggregates.GenericRequest() { Id = request.Id }).ConfigureAwait(false);
                     // Step 3: Get user to validate if user deleted
-                    var aggregate = await _repositories.UsersRepository.GetAsync(new Domain.Aggregates.GenericRequest() { RequestId = request.UserId }).ConfigureAwait(false);
+                    var aggregate = await _repositories.UsersRepository.GetAsync(new Domain.Aggregates.GenericRequest() { Id = request.Id }).ConfigureAwait(false);
                     // Step 4: Add response messages for succes or failure
                     if (aggregate != null && aggregate.User == null)
                         HandleMessage(response, "User deleted successfully.");
@@ -72,14 +72,14 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Commands.De
         {
             if (request == null)
                 HandleMessage(response, "Request cannot be null", Enums.MessageTypeEnum.ValidationError);
-            else if (request.UserId == Guid.Empty)
-                HandleMessage(response, $"Invalid user id passed {request.UserId}", Enums.MessageTypeEnum.ValidationError);
+            else if (string.IsNullOrWhiteSpace(request.Id))
+                HandleMessage(response, $"Invalid user id passed.", Enums.MessageTypeEnum.ValidationError);
             else
             {
                 // Check if user exists to update
                 var existingUserAggregate = await _repositories.UsersRepository.GetAsync(_mapper.Map<GenericRequest>(request));
                 if (existingUserAggregate.User == null)
-                    HandleMessage(response, $"User not found for the user id : {request.UserId}.Hence cannot be deleted.", Enums.MessageTypeEnum.ValidationError);
+                    HandleMessage(response, $"User not found for the user id : {request.Id}.Hence cannot be deleted.", Enums.MessageTypeEnum.ValidationError);
             }
         }
         #endregion

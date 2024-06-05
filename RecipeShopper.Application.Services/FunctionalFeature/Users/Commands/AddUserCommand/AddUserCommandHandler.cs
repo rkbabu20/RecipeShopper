@@ -30,6 +30,12 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Commands.Ad
         #endregion
 
         #region Interface methods
+        /// <summary>
+        /// Handle add user command response
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<AddUserCommandResponse> Handle(AddUserCommand request, CancellationToken cancellationToken)
         {
             var response = new AddUserCommandResponse();
@@ -40,7 +46,8 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Commands.Ad
                 if (response.IsValid())
                 {
                     // Step 2 : Add user
-                    UsersAggregate aggregate = new UsersAggregate(_mapper.Map<User>(request.User));
+                    var user = _mapper.Map<User>(request);
+                    UsersAggregate aggregate = new UsersAggregate(new RegisterUser(user, request.Password!));
                     await _repositories.UsersRepository.AddAsync(aggregate).ConfigureAwait(false);
 
                     // Step 3 : Check if user really added
@@ -51,17 +58,26 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Commands.Ad
             }
             catch (Exception ex) { HandleException(response, ex); }
             return response;
-        }
+        }// End 
 
+        /// <summary>
+        /// Validate user input
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="response"></param>
+        /// <returns></returns>
         protected async override Task Validate(AddUserCommand request, AddUserCommandResponse response)
         {
             if (request == null) { base.HandleMessage(response, "Request cannot be null", Enums.MessageTypeEnum.ValidationError); }
-            else if (request.User == null) { base.HandleMessage(response, "User cannot be be null.", Enums.MessageTypeEnum.ValidationError); }
-            else
+                        else
             {
-                var userAggregate = await _repositories.UsersRepository.GetUserByEmailAsync(request.User.Email);
-                if (userAggregate != null && userAggregate.User != null)
-                    base.HandleMessage(response, $"User already exists with the given email {request.User.Email}.", Enums.MessageTypeEnum.ValidationError);
+                if (string.IsNullOrWhiteSpace(request.FirstName)) { base.HandleMessage(response, "User first name is missing.", Enums.MessageTypeEnum.ValidationError); }
+                if (string.IsNullOrWhiteSpace(request.LastName)) { base.HandleMessage(response, "User last name is missing.", Enums.MessageTypeEnum.ValidationError); }
+                if (string.IsNullOrWhiteSpace(request.Email)) { base.HandleMessage(response, "User email is missing.", Enums.MessageTypeEnum.ValidationError); }
+                else if ((await _repositories.UsersRepository.GetUserByEmailAsync(request.Email).ConfigureAwait(false)).User != null)
+                    base.HandleMessage(response, $"User already exists with the given email {request.Email}.", Enums.MessageTypeEnum.ValidationError);
+                if (string.IsNullOrWhiteSpace(request.Password)) { base.HandleMessage(response, "User password is missing.", Enums.MessageTypeEnum.ValidationError); }
+                if (request.Role == Enums.RegisterUserRoleEnum.Unspecified) { base.HandleMessage(response, "User role is missing.", Enums.MessageTypeEnum.ValidationError); }
             }
         }
         #endregion

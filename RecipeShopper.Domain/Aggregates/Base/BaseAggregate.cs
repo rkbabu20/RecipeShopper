@@ -12,6 +12,7 @@ namespace RecipeShopper.Domain.Aggregates.Base
     /// </summary>
     public class BaseAggregate
     {
+        public BaseAggregate() { ApplicationErrors = new List<string>(); ValidationErrors = new List<string>(); }
         #region Properties
         /// <summary>Status to know if entity is added in db</summary>
         public bool IsAdded { get; set; }
@@ -21,6 +22,10 @@ namespace RecipeShopper.Domain.Aggregates.Base
         public bool IsUpdated { get; set; }
         /// <summary>Status to know if entity is partially updated</summary>
         public bool IsPatched { get; set; }
+        /// <summary>Application errors</summary>
+        public List<string> ApplicationErrors { get; set; }
+        /// <summary>Validation errors</summary>
+        public List<string> ValidationErrors { get; set; }
         #endregion
 
     }//End BaseAggregate
