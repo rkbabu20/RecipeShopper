@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.Commands.UpdateStockIngradientCommand
 {
     /// <summary>
-    /// Delete stock ingradient command 
+    /// Update stock ingradient command 
     /// </summary>
     public class UpdateStockIngradientCommand(StockIngradientDTO stockIngradientDTO) : IRequest<UpdateStockIngradientCommandResponse>
     {

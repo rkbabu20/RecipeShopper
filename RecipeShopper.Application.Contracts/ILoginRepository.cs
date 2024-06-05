@@ -10,5 +10,8 @@ using System.Threading.Tasks;
 
 namespace RecipeShopper.Application.Contracts
 {
+    /// <summary>
+    /// Login repo interface
+    /// </summary>
     public interface ILoginRepository : IValidateAsync<Login, LogInAggregate>;
 }

@@ -15,20 +15,13 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Quaries.Get
     /// <summary>
     /// Get Get users query handler
     /// </summary>
-    public class GetUserQueryHandler :
-        BaseHandler<GetUserQuery, GetUserResponse>,
-        IRequestHandler<GetUserQuery, GetUserResponse>
+    public class GetUserQueryHandler(IRepositories repositories, IMapper mapper) :
+        BaseHandler<GetUserQuery, GetUserQueryResponse>,
+        IRequestHandler<GetUserQuery, GetUserQueryResponse>
     {
         #region Private variables
-        private readonly IRepositories _repositories = null;
-        private readonly IMapper _mapper = null;
-        #endregion
-        #region Constructor
-        public GetUserQueryHandler(IRepositories repositories, IMapper mapper)
-        {
-            _repositories = repositories;
-            _mapper = mapper;
-        }
+        private readonly IRepositories _repositories = repositories;
+        private readonly IMapper _mapper = mapper;
         #endregion
 
         #region Interface methods
@@ -38,9 +31,9 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Quaries.Get
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<GetUserResponse> Handle(GetUserQuery request, CancellationToken cancellationToken)
+        public async Task<GetUserQueryResponse> Handle(GetUserQuery request, CancellationToken cancellationToken)
         {
-            var response = new GetUserResponse();
+            var response = new GetUserQueryResponse();
             try
             {
                 // Step 1 : Validate request
@@ -49,7 +42,7 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Quaries.Get
                 {
                     // Step 2 : Get user 
                     var usersAggregate = await _repositories.UsersRepository.GetAsync(_mapper.Map<GenericRequest>(request));
-                    response = _mapper.Map<GetUserResponse>(usersAggregate);
+                    response = _mapper.Map<GetUserQueryResponse>(usersAggregate);
                     // Step 3 : Check if user exists
                     if (response != null && response.User != null)
                         HandleMessage(response, "User retrieved successfully.");
@@ -67,7 +60,7 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Quaries.Get
         /// <param name="request">GetUserQuery</param>
         /// <param name="response">GetUserResponse</param>
         /// <returns></returns>
-        protected async override Task Validate(GetUserQuery request, GetUserResponse response)
+        protected async override Task Validate(GetUserQuery request, GetUserQueryResponse response)
         {
             if (request == null) { base.HandleMessage(response, "Request cannot be null", Enums.MessageTypeEnum.ValidationError); }
             else if (string.IsNullOrWhiteSpace(request.Id)) { base.HandleMessage(response, $"Invalid user id passed {request.Id}", Enums.MessageTypeEnum.ValidationError); }

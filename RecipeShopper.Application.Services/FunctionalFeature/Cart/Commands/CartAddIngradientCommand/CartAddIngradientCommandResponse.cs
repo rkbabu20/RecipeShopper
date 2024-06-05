@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.CartAddIngradientCommand
 {
-    public class CartAddIngradientCommandResponse : BaseResponse
-    {
-    }
+    /// <summary>
+    /// Cart add ingradient command response
+    /// </summary>
+    public class CartAddIngradientCommandResponse : BaseResponse { }
 }

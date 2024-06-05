@@ -13,7 +13,14 @@ namespace RecipeShopper.Application.Services.Extensions
     /// </summary>
     static class MessagesExtension
     {
+        #region private variables
         static List<MessageTypeEnum> _failureMessageTypes = null;
+        #endregion
+
+        #region Constructor
+        /// <summary>
+        /// Messages
+        /// </summary>
         static MessagesExtension()
         {
             _failureMessageTypes = new List<MessageTypeEnum>()
@@ -23,6 +30,9 @@ namespace RecipeShopper.Application.Services.Extensions
                 MessageTypeEnum.NoResourceFoundError
             };
         }
+        #endregion
+
+        #region Extension methods
         /// <summary>
         /// Get status type
         /// </summary>
@@ -41,5 +51,6 @@ namespace RecipeShopper.Application.Services.Extensions
             }
             return statusType;
         }
+        #endregion
     }
 }

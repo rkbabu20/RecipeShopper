@@ -13,7 +13,12 @@ using RecipeShopper.Domain.Entities;
 
 namespace RecipeShopper.Api.Controllers
 {
-    [Authorize]
+    /// <summary>
+    /// Orders controller
+    /// </summary>
+    /// <param name="mediator"></param>
+    /// <param name="mapper"></param>
+   [Authorize]
     public class OrderController(IMediator mediator, IMapper mapper) : BaseController
     {
         #region private variables
@@ -25,6 +30,7 @@ namespace RecipeShopper.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("{userId}/all")]
+        [ProducesResponseType(typeof(GetAllOrdersQueryResponse), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllOrders([FromRoute] string userId)
         {
             // Get all orders
@@ -38,6 +44,7 @@ namespace RecipeShopper.Api.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpGet("{orderId}")]
+        [ProducesResponseType(typeof(GetOrderQueryResponse), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get([FromRoute] string orderId)
         {
             // Get all orders
@@ -51,6 +58,7 @@ namespace RecipeShopper.Api.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost("submit")]
+        [ProducesResponseType(typeof(SubmitOrderCommandResponse),StatusCodes.Status200OK)]
         public async Task<IActionResult> Submit([FromBody] SubmitOrderRequest submitRequest)
         {
             // Get all orders

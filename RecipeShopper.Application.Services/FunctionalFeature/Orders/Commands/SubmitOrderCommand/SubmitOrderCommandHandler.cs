@@ -15,6 +15,11 @@ using RecipeShopper.Domain.Aggregates.OrdersAggrigate;
 
 namespace RecipeShopper.Application.Services.FunctionalFeature.Orders.Commands.SubmitOrderCommand
 {
+    /// <summary>
+    /// Submit order command handler
+    /// </summary>
+    /// <param name="repositories"></param>
+    /// <param name="mapper"></param>
     public class SubmitOrderCommandHandler(IRepositories repositories, IMapper mapper) :
         BaseHandler<SubmitOrderCommand, SubmitOrderCommandResponse>,
         IRequestHandler<SubmitOrderCommand, SubmitOrderCommandResponse>
@@ -23,6 +28,13 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Orders.Commands.S
         private readonly IRepositories _repositories = repositories;
         private readonly IMapper _mapper = mapper;
         #endregion
+
+        /// <summary>
+        /// Handle submit order
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<SubmitOrderCommandResponse> Handle(SubmitOrderCommand request, CancellationToken cancellationToken)
         {
             var response = new SubmitOrderCommandResponse();
@@ -35,14 +47,17 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Orders.Commands.S
                     var cartAggregate = await _repositories.CartRepository.GetAsync(new Domain.Aggregates.GenericRequest() { RequestId = cartId });
                     if (cartAggregate != null && cartAggregate.Cart != null)
                     {
+                        cartAggregate.Cart.ModifiedDate = DateTime.UtcNow;
                         // Step 2 : construct Order entity
                         var orderAggregate = new OrdersAggregate(new DomainEntities.Order()
                         {
-                            User = cartAggregate.Cart.User,
-                            Recipes = cartAggregate.Cart.Recipes,
-                            CreateDate = cartAggregate.Cart.CreateDate,
-                            OrderId = Guid.NewGuid()
+                            Cart = cartAggregate.Cart,
+                            CreateDate = DateTime.Now,
+                            OrderId = Guid.NewGuid(),
+                            OrderStatus = "Submitted",
+                            UserId = request.UserId
                         });
+
                         // Step 3 : Submit order
                         await _repositories.OrdersRepository.SubmitAsync(orderAggregate).ConfigureAwait(false);
                         // Step 4 : Check status

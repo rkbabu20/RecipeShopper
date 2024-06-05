@@ -10,7 +10,7 @@ namespace RecipeShopper.Domain.Aggregates.LoginAggregate
     /// <summary>
     /// Login aggregate
     /// </summary>
-    public class LogInAggregate 
+    public class LogInAggregate
     {
         public bool IsLoginSuccess { get; set; }
         public string? Token { get; set; }

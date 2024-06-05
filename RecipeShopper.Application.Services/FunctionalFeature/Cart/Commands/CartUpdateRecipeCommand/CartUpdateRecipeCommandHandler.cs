@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RecipeShopper.Domain.Entities;
 
 namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.CartUpdateRecipeCommand
 { 
@@ -27,14 +28,22 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.Car
             var response = new CartUpdateRecipeCommandResponse();
             try
             {
-            //    await Validate(request, response).ConfigureAwait(false);
-            //    if(response.IsValid())
-            //    {
-            //        // Step 1 : Prepare domain cart add request
-            //        var cartAggregate = new CartAggregate(_mapper.Map<DomainEntities.Cart>(request.Cart));
-            //       // Step 2 : Add request to db
-            //       // Step 3 : Validate status and updae response with status and messages
-            //    }
+                await Validate(request, response).ConfigureAwait(false);
+                if (response.IsValid() && Guid.TryParse(request.CartId, out var cartId))
+                {
+                    // Prepare recipe for update
+                    var cartAggregate = new CartAggregate(_mapper.Map<Recipe>(request.Recipe));
+                    cartAggregate.Recipe.ApplyDateProperties(true, true);
+                   
+                    await _repositories.CartRepository.UpdateRecipeToCart(cartId, cartAggregate).ConfigureAwait(false);
+
+                    // Step 3 : Validate status and updae response with status and messages
+                    if (cartAggregate.IsUpdated)
+                        base.HandleMessage(response, $"Recipe updated in cart.");
+                    else
+                        base.HandleMessage(response, $"Recipe update failed in cart.", Enums.MessageTypeEnum.ApplicationError);
+
+                }
             }
             catch (Exception ex) { HandleException(response, ex); }
             return response;
@@ -42,15 +51,9 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.Car
 
         protected async override Task Validate(CartUpdateRecipeCommand request, CartUpdateRecipeCommandResponse response)
         {
-            //if (request == null) { base.HandleMessage(response, "Request cannot be null", Enums.MessageTypeEnum.ValidationError); }
-            //else if (request.Cart == null) { base.HandleMessage(response, "Cart is null and cannot be added.", Enums.MessageTypeEnum.ValidationError); }
-            //else if(request.Cart.User== null) { base.HandleMessage(response, "User is null and cannot be added.", Enums.MessageTypeEnum.ValidationError); }
-            //else
-            //{
-            //    var existingCart = await _repositories.CartRepository.GetAsync(new Domain.Aggregates.GenericRequest() { Id = request.Cart?.User!.Id! }); ;
-            //    if (existingCart != null && existingCart.Cart!=null)
-            //        base.HandleMessage(response, $"Cart already exists.", Enums.MessageTypeEnum.ValidationError);
-            //}
+            if (request == null) { base.HandleMessage(response, "Request cannot be null", Enums.MessageTypeEnum.ValidationError); }
+            else if (request.Recipe == null) { base.HandleMessage(response, "Recipe is null and cannot be update.", Enums.MessageTypeEnum.ValidationError); }
+            else if (!Guid.TryParse(request.CartId, out _)) { base.HandleMessage(response, "Provide valid cart identifier.", Enums.MessageTypeEnum.ValidationError); }
         }
     }
 }

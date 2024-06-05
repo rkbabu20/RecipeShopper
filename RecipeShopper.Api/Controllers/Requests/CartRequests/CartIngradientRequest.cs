@@ -2,11 +2,11 @@
 
 namespace RecipeShopper.Api.Controllers.Requests.CartRequests
 {
-    public class CartIngradientRequest : BaseIngradient
+    /// <summary>
+    /// Ingradient to add cart Recipe
+    /// </summary>
+    public class CartIngradientRequest 
     {
-        /// <summary>Cart Ingradient id</summary>
-        public Guid CartIngradientId { get; set; }
-        /// <summary>Stock Ingradient id</summary>
         public Guid StockIngradientId { get; set; }
         /// <summary>Ordered quanity</summary>
         public int OrderedQuantity { get; set; }

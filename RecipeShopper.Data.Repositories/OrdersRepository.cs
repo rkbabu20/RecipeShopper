@@ -26,14 +26,14 @@ namespace RecipeShopper.Data.Repositories
             {
                 // Step 1: Get the order 
                 var order = dbContext.Orders.FirstOrDefault(p => p.OrderId == request.RequestId);
-                if (order !=null)
+                if (order != null)
                 {
                     // Step 2 : Reset the availability quantity for all stock ingradients
-                    var cartIngradients = order.Recipes!.SelectMany(r => r.Ingradients!.ToList()).GroupBy(e=>e.StockIngradientId);
+                    var cartIngradients = order.Cart.Recipes!.SelectMany(r => r.Ingradients!.ToList()).GroupBy(e => e.StockIngradientId);
                     var stockIngradients = dbContext.StockIngradients.ToList();
                     if (stockIngradients.Any())
                     {
-                      foreach (var item in cartIngradients)
+                        foreach (var item in cartIngradients)
                         {
                             var sIngradient = stockIngradients.Find(p => p.StockIngradientId == item.Key);
                             sIngradient!.AvailableQuantity = sIngradient.AvailableQuantity + item.Sum(p => p.OrderedQuantity);
@@ -54,7 +54,7 @@ namespace RecipeShopper.Data.Repositories
         /// <returns></returns>
         public async Task<OrdersAggregate> GetAllAsync(GenericRequest request)
         {
-            return new OrdersAggregate(dbContext.Orders.Where(x => x.User.Id.Equals(request.Id)).ToList());
+            return new OrdersAggregate(dbContext.Orders.Where(x => x.UserId.Equals(request.Id)).ToList());
         }
 
         /// <summary>
@@ -78,10 +78,8 @@ namespace RecipeShopper.Data.Repositories
         {
             if (ordersAggregate != null && ordersAggregate.Order != null)
             {
-                var result = dbContext.Orders.Add(ordersAggregate.Order!);
-                ordersAggregate.IsAdded = result.State == Microsoft.EntityFrameworkCore.EntityState.Added;
                 // Step 2 : Reset the availability quantity for all stock ingradients
-                var cartIngradients = ordersAggregate.Order.Recipes!.SelectMany(r => r.Ingradients!.ToList()).GroupBy(e => e.StockIngradientId);
+                var cartIngradients = ordersAggregate.Order.Cart.Recipes!.SelectMany(r => r.Ingradients!.ToList()).GroupBy(e => e.StockIngradientId);
                 var stockIngradients = dbContext.StockIngradients.ToList();
                 if (stockIngradients.Any())
                 {
@@ -89,14 +87,13 @@ namespace RecipeShopper.Data.Repositories
                     {
                         var sIngradient = stockIngradients.Find(p => p.StockIngradientId == item.Key);
                         var orderedQuantity = item.Sum(p => p.OrderedQuantity);
-                        if (sIngradient!.AvailableQuantity >= orderedQuantity)
-                            sIngradient!.AvailableQuantity = sIngradient.AvailableQuantity - item.Sum(p => p.OrderedQuantity);
+                        if (sIngradient.AvailableQuantity >= orderedQuantity)
+                            sIngradient.AvailableQuantity = sIngradient.AvailableQuantity - item.Sum(p => p.OrderedQuantity);
                         else ordersAggregate.ValidationErrors.Add($"{sIngradient.Name} not having sufficient quantity to order. Ordered quantity{orderedQuantity} but available quantity {sIngradient.AvailableQuantity}");
                     }
                     if (!ordersAggregate.ValidationErrors!.Any())
                     {
-                        // Remove cart
-                        dbContext.Cart.Remove(dbContext.Cart.FirstOrDefault(x => x.CartId == ordersAggregate.Order!.Recipes[0].CartId));
+                        UpdateCartForOrderSubmit(ordersAggregate.Order);
                         // Save changes to db
                         dbContext.SaveChanges();
                     }
@@ -104,5 +101,17 @@ namespace RecipeShopper.Data.Repositories
                 }
             }
         }
+
+        private void UpdateCartForOrderSubmit(Order order)
+        {
+            if (order != null)
+            {
+                var cart = dbContext.Cart.FirstOrDefault(C => C.CartId == order.Cart.CartId);
+                cart.OrderId= order.OrderId;
+                cart.ModifiedDate = order.Cart.ModifiedDate;
+                dbContext.Orders.Add(order);
+            }
+        }
+
     }
 }

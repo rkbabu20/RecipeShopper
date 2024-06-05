@@ -15,7 +15,11 @@ namespace RecipeShopper.Application.Contracts
         /// <param name="name">name</param>
         /// <returns>UsersAggregate</returns>
         Task<StockIngradientsAggrigate> GetByNameAsync(string name);
-
+        /// <summary>
+        /// Stock ingradient patch
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         Task Patch(StockIngradientsAggrigate request);
     }
 }

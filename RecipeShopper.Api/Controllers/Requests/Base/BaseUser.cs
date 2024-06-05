@@ -3,6 +3,9 @@ using RecipeShopper.Api.Controllers.Requests.Enums;
 
 namespace RecipeShopper.Api.Controllers.Requests.Base
 {
+    /// <summary>
+    /// Base User
+    /// </summary>
     public class BaseUser
     {
        
@@ -15,7 +18,7 @@ namespace RecipeShopper.Api.Controllers.Requests.Base
         [Required]
         public string? Email { get; set; }
         [Required]
-        public UserRoleEnum Role { get; set; }
+        public CustomerUserRoleEnum Role { get; set; }
 
     }
 }

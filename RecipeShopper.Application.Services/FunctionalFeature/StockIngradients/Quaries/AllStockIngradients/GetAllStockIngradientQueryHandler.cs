@@ -33,6 +33,12 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.
         }
         #endregion
 
+        /// <summary>
+        /// Get all master list of ingradients for recipe preparation 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<GetAllStockIngradientResponse> Handle(GetAllStockIngradientQuery request, CancellationToken cancellationToken)
         {
             var response = new GetAllStockIngradientResponse();

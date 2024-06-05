@@ -49,6 +49,12 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Commands.Up
             return response!;
         }
 
+        /// <summary>
+        /// Validate input
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="response"></param>
+        /// <returns></returns>
         protected async override Task Validate(UpdateUserCommand request, UpdateUserCommandResponse response)
         {
             if (request == null) { base.HandleMessage(response, "Request cannot be null", Enums.MessageTypeEnum.ValidationError); }

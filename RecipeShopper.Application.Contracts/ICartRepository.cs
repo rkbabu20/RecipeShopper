@@ -17,6 +17,7 @@ namespace RecipeShopper.Application.Contracts
         #region Recipe cart actions
         Task AddRecipeToCart(Guid cartId, CartAggregate request);
         Task DeleteRecipeFromCart(Guid cartId,Guid recipeId,CartAggregate request);
+        Task UpdateRecipeToCart(Guid cartId, CartAggregate request);
         #endregion
 
         #region Ingradient cart actions

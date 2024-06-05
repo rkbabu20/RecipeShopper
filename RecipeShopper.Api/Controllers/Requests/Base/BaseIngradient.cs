@@ -18,6 +18,8 @@ namespace RecipeShopper.Api.Controllers.Requests.Base
         /// <summary>
         /// Quanity type
         /// </summary>
-        public IngradientQuantityType QuantityType { get; set; }
+        public IngradientUOMType QuantityType { get; set; }
+        /// <summary>Price per quantity</summary>
+        public decimal PricePerQuantity { get; set; }
     }// End BaseIngradient
 }

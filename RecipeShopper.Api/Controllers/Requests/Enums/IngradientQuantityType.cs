@@ -1,6 +1,9 @@
 ﻿namespace RecipeShopper.Api.Controllers.Requests.Enums
 {
-    public enum IngradientQuantityType
+    /// <summary>
+    /// Quantity type
+    /// </summary>
+    public enum IngradientUOMType
     {
         Unspecified = 0,
         Pieces = 1,

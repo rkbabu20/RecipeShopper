@@ -61,6 +61,12 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Quaries.GetC
         }
         #endregion
 
+        /// <summary>
+        /// Validate input
+        /// </summary>
+        /// <param name="request">GetCartQuery</param>
+        /// <param name="response">GetCartQueryResponse</param>
+        /// <returns></returns>
         protected async override Task Validate(GetCartQuery request, GetCartQueryResponse response)
         {
             if (request == null) { base.HandleMessage(response, "Request cannot be null", Enums.MessageTypeEnum.ValidationError); }

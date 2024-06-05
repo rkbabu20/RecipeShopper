@@ -11,8 +11,6 @@ namespace RecipeShopper.Domain.Entities
     {
         public Recipe() { Ingradients = new List<CartIngradient>(); }
         /// <summary>CartId</summary>
-        public Guid CartId { get; set; }
-        /// <summary>Recipe id</summary>
         public Guid RecipeId { get; set; }
         /// <summary>Recipe name</summary>
         public string? Name { get; set; }

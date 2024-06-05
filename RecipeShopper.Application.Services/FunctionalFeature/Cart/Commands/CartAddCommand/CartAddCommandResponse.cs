@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.CartAddCommand
 {
+    /// <summary>
+    /// Cart add handler response
+    /// </summary>
     public class CartAddCommandResponse : BaseResponse
     {
     }

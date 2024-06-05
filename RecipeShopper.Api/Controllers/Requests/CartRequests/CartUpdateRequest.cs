@@ -2,6 +2,9 @@
 
 namespace RecipeShopper.Api.Controllers.Requests.CartRequests
 {
+    /// <summary>
+    /// Cart update request
+    /// </summary>
     public class CartUpdateRequest : BaseCartRequest
     {
     }

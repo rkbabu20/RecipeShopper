@@ -5,7 +5,9 @@
     /// </summary>
     public class SubmitOrderRequest
     {
-        public string UseId {  get; set; }
+        /// <summary>User Id</summary>
+        public string UserId {  get; set; }
+        /// <summary>Cart Id</summary>
         public string CartId { get; set; }
     }
 }

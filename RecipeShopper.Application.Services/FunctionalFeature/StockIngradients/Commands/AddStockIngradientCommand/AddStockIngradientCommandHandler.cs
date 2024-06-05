@@ -27,6 +27,12 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.
         #endregion
 
         #region Interface methods
+        /// <summary>
+        /// Master list of ingradients - Add logic
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<AddStockIngradientCommandResponse> Handle(AddStockIngradientCommand request, CancellationToken cancellationToken)
         {
             var response = new AddStockIngradientCommandResponse();

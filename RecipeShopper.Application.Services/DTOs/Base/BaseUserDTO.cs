@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace RecipeShopper.Application.Services.DTOs.Base
 {
+    /// <summary>
+    /// Base user DTO
+    /// </summary>
     public class BaseUserDTO
     {
         /// <summary>User Id</summary>
@@ -19,6 +22,6 @@ namespace RecipeShopper.Application.Services.DTOs.Base
         public string? Email { get; set; }
 
         /// <summary>User Role</summary>
-        public UserRoleEnum Role { get; set; }
-    }
-}
+        public RegisterUserRoleEnum Role { get; set; }
+    }// End BaseUserDTO
+}// End BaseUserDTO

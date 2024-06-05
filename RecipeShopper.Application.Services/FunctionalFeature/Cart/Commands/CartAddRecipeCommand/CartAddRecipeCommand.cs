@@ -14,9 +14,8 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.Car
     /// <param name="cartDto">CartDTO</param>
     public class CartAddRecipeCommand :IRequest<CartAddRecipeCommandResponse>
     {
-        /// <summary>User Id</summary>
-        public string UserId { get; set; }
-        /// <summary>User Id</summary>
+
+        /// <summary>Cart Id</summary>
         public string CartId { get; set; }
         /// <summary>Recipe</summary>
         public RecipeDTO Recipe { get; set; }

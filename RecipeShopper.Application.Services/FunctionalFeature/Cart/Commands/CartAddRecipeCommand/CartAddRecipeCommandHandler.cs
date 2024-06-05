@@ -15,6 +15,11 @@ using RecipeShopper.Domain.Entities;
 
 namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.CartAddRecipeCommand
 { 
+    /// <summary>
+    /// Cart add recipe command handler
+    /// </summary>
+    /// <param name="repositories">Repositories</param>
+    /// <param name="mapper">Mapper</param>
     public class CartAddRecipeCommandHandler(IRepositories repositories, IMapper mapper) :
         BaseHandler<CartAddRecipeCommand, CartAddRecipeCommandResponse>,
         IRequestHandler<CartAddRecipeCommand, CartAddRecipeCommandResponse>
@@ -23,6 +28,12 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.Car
         private readonly IRepositories _repositories = repositories;
         private readonly IMapper _mapper = mapper;
         #endregion
+        /// <summary>
+        /// Handle
+        /// </summary>
+        /// <param name="request">CartAddRecipeCommand</param>
+        /// <param name="cancellationToken">CancellationToken</param>
+        /// <returns></returns>
         public async Task<CartAddRecipeCommandResponse> Handle(CartAddRecipeCommand request, CancellationToken cancellationToken)
         {
             var response = new CartAddRecipeCommandResponse();
@@ -47,11 +58,16 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.Car
             return response;
         }
 
+        /// <summary>
+        /// Validate input
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="response"></param>
+        /// <returns></returns>
         protected async override Task Validate(CartAddRecipeCommand request, CartAddRecipeCommandResponse response)
         {
             if (request == null) { base.HandleMessage(response, "Request cannot be null", Enums.MessageTypeEnum.ValidationError); }
             else if (request.Recipe == null) { base.HandleMessage(response, "Recipe cannot be null", Enums.MessageTypeEnum.ValidationError); }
-            else if (string.IsNullOrEmpty(request.UserId)) { base.HandleMessage(response, "Provide valid user identifier.", Enums.MessageTypeEnum.ValidationError); }
             else if (!Guid.TryParse(request.CartId, out _)) { base.HandleMessage(response, "Provide valid cart identifier.", Enums.MessageTypeEnum.ValidationError); }
         }
     }

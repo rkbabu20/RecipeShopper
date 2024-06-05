@@ -11,12 +11,12 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Quaries.Get
     /// <summary>
     /// Get user response
     /// </summary>
-    public class GetUserResponse : BaseResponse
+    public class GetUserQueryResponse : BaseResponse
     {
         /// <summary>
         /// Get user response
         /// </summary>
-        public GetUserResponse() { }
+        public GetUserQueryResponse() { }
 
         /// <summary>User</summary>
         public ViewUserDTO? User { get; set; }

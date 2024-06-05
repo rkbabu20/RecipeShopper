@@ -15,6 +15,11 @@ using RecipeShopper.Domain.Entities;
 
 namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.CartAddIngradientCommand
 { 
+    /// <summary>
+    /// Cart add ingradient command handler
+    /// </summary>
+    /// <param name="repositories">Repositories</param>
+    /// <param name="mapper">Mapper</param>
     public class CartAddIngradientCommandHandler(IRepositories repositories, IMapper mapper) :
         BaseHandler<CartAddIngradientCommand, CartAddIngradientCommandResponse>,
         IRequestHandler<CartAddIngradientCommand, CartAddIngradientCommandResponse>
@@ -23,6 +28,13 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.Car
         private readonly IRepositories _repositories = repositories;
         private readonly IMapper _mapper = mapper;
         #endregion
+
+        /// <summary>
+        /// Handle cart add ingradient
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<CartAddIngradientCommandResponse> Handle(CartAddIngradientCommand request, CancellationToken cancellationToken)
         {
             var response = new CartAddIngradientCommandResponse();
@@ -52,6 +64,12 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.Car
             return response;
         }
 
+        /// <summary>
+        /// Validate input
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="response"></param>
+        /// <returns></returns>
         protected async override Task Validate(CartAddIngradientCommand request, CartAddIngradientCommandResponse response)
         {
             if (request == null) { base.HandleMessage(response, "Request cannot be null", Enums.MessageTypeEnum.ValidationError); }

@@ -15,6 +15,6 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Orders.Quaries.Ge
     public class GetOrderQuery(string orderId) : IRequest<GetOrderQueryResponse>
     {
         /// <summary>Order Id</summary>
-        public string OrderId { get; set; }
+        public string OrderId { get; set; } = orderId;
     }
 }

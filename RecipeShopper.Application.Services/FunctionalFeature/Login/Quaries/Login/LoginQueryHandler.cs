@@ -28,6 +28,12 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Login.Quaries.Log
         #endregion
 
         #region Interface login
+        /// <summary>
+        /// Handle login 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<LoginQueryResponse> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
             var response = new LoginQueryResponse();
@@ -54,6 +60,12 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Login.Quaries.Log
         #endregion
 
         #region abstract class logic
+        /// <summary>
+        /// Validate user input
+        /// </summary>
+        /// <param name="request">LoginQuery</param>
+        /// <param name="response">LoginQueryResponse</param>
+        /// <returns></returns>
         protected async override Task Validate(LoginQuery request, LoginQueryResponse response)
         {
             if (request == null) { HandleMessage(response, "Request cannot be null", Enums.MessageTypeEnum.ValidationError); }
@@ -66,7 +78,7 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Login.Quaries.Log
                 if (userAggregate != null && userAggregate.User == null)
                     HandleMessage(response, "Invalid email/password.", Enums.MessageTypeEnum.ValidationError);
             }
-        }
+        }// Validate
         #endregion
     }
 }

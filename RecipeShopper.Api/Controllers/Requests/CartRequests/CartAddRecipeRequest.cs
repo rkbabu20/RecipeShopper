@@ -1,9 +1,13 @@
-﻿namespace RecipeShopper.Api.Controllers.Requests.CartRequests
+﻿using RecipeShopper.Api.Controllers.Requests.Base;
+
+namespace RecipeShopper.Api.Controllers.Requests.CartRequests
 {
-    public class CartAddRecipeRequest
+    /// <summary>
+    /// Request to add Recipe to cart
+    /// </summary>
+    public class CartAddRecipeRequest : BaseRecipeRequest
     {
-        public string? UserId { get; set; }
-        public string? CartId { get; set; }
+        /// <summary>Recipe to add</summary>
         public RecipeRequest? Recipe { get; set; }
     }
 }

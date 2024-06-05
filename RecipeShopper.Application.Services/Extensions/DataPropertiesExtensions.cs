@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace RecipeShopper.Application.Services.Extensions
 {
+    /// <summary>
+    /// Data properties extension
+    /// </summary>
     public static class DataPropertiesExtensions
     {
         /// <summary>

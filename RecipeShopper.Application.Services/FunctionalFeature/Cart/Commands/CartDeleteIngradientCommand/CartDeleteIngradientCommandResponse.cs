@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.CartDeleteIngradientCommand
 {
+    /// <summary>
+    /// Response for CartDeleteIngradientCommand
+    /// </summary>
     public class CartDeleteIngradientCommandResponse : BaseResponse
     {
     }

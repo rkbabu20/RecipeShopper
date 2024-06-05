@@ -16,9 +16,9 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.Car
     {
         /// <summary>User Id</summary>
         public string? UserId { get; set; }
-        /// <summary>User Id</summary>
+        /// <summary>Cart Id</summary>
         public string? CartId { get; set; }
-        /// <summary>Recipe</summary>
+        /// <summary>Recipe Id</summary>
         public string? RecipeId { get; set; }
         /// <summary>Ingradient</summary>
         public CartIngradientDTO? Ingradient { get; set; }

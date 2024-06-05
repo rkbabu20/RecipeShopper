@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Quaries.GetCartQuery
 {
     /// <summary>
-    /// Cart dto
+    /// Get Cart Query Response
     /// </summary>
     public class GetCartQueryResponse : BaseResponse
     {

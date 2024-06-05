@@ -14,11 +14,9 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.Car
     /// <param name="cartDto">CartDTO</param>
     public class CartDeleteRecipeCommand : IRequest<CartDeleteRecipeCommandResponse>
     {
-        /// <summary>User Id</summary>
-        public string UserId { get; set; }
-        /// <summary>User Id</summary>
+        /// <summary>Cart Id</summary>
         public string CartId { get; set; }
         /// <summary>Recipe Id</summary>
         public string RecipeId { get; set; }
-    }
+    }// CartDeleteRecipeCommand
 }

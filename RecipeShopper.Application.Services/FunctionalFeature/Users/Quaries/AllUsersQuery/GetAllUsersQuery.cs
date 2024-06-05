@@ -10,7 +10,7 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Quaries.All
     /// <summary>
     /// Get all users query
     /// </summary>
-    public class GetAllUsersQuery : IRequest<GetAllUsersResponse>
+    public class GetAllUsersQuery : IRequest<GetAllUsersQueryResponse>
     {
         public GetAllUsersQuery() { }
     }

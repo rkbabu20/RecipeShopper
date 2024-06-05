@@ -15,6 +15,11 @@ using RecipeShopper.Domain.Entities;
 
 namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.CartDeleteIngradientCommand
 { 
+    /// <summary>
+    /// Delete ingradient command handler
+    /// </summary>
+    /// <param name="repositories"></param>
+    /// <param name="mapper"></param>
     public class CartDeleteIngradientCommandHandler(IRepositories repositories, IMapper mapper) :
         BaseHandler<CartDeleteIngradientCommand, CartDeleteIngradientCommandResponse>,
         IRequestHandler<CartDeleteIngradientCommand, CartDeleteIngradientCommandResponse>
@@ -23,6 +28,13 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.Car
         private readonly IRepositories _repositories = repositories;
         private readonly IMapper _mapper = mapper;
         #endregion
+
+        /// <summary>
+        /// CartIngradient delete command
+        /// </summary>
+        /// <param name="request">CartDeleteIngradientCommand</param>
+        /// <param name="cancellationToken">CancellationToken</param>
+        /// <returns></returns>
         public async Task<CartDeleteIngradientCommandResponse> Handle(CartDeleteIngradientCommand request, CancellationToken cancellationToken)
         {
             var response = new CartDeleteIngradientCommandResponse();
@@ -42,12 +54,17 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.Car
             }
             catch (Exception ex) { HandleException(response, ex); }
             return response;
-        }
+        }// Handle
 
+        /// <summary>
+        /// Validate input
+        /// </summary>
+        /// <param name="request">CartDeleteIngradientCommand</param>
+        /// <param name="response">CartDeleteIngradientCommandResponse</param>
+        /// <returns></returns>
         protected async override Task Validate(CartDeleteIngradientCommand request, CartDeleteIngradientCommandResponse response)
         {
             if (request == null) { base.HandleMessage(response, "Request cannot be null", Enums.MessageTypeEnum.ValidationError); }
-            else if (string.IsNullOrEmpty(request.UserId)) { base.HandleMessage(response, "Provide valid user identifier.", Enums.MessageTypeEnum.ValidationError); }
             else if (!Guid.TryParse(request.CartId, out _)) { base.HandleMessage(response, "Provide valid cart identifier.", Enums.MessageTypeEnum.ValidationError); }
             else if (!Guid.TryParse(request.CartIngradientId, out _)) { base.HandleMessage(response, "Provide valid ingradient identifier.", Enums.MessageTypeEnum.ValidationError); }
         }

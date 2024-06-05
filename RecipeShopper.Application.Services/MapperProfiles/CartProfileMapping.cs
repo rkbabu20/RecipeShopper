@@ -20,6 +20,9 @@ using System.Threading.Tasks;
 
 namespace RecipeShopper.Application.Services.MapperProfiles
 {
+    /// <summary>
+    /// Cart profiel mapping
+    /// </summary>
     public class CartProfileMapping : Profile
     {
         public CartProfileMapping() {

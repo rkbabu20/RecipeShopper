@@ -22,7 +22,9 @@ namespace RecipeShopper.Domain.Aggregates.Base
         public bool IsUpdated { get; set; }
         /// <summary>Status to know if entity is partially updated</summary>
         public bool IsPatched { get; set; }
+        /// <summary>Application errors</summary>
         public List<string> ApplicationErrors { get; set; }
+        /// <summary>Validation errors</summary>
         public List<string> ValidationErrors { get; set; }
         #endregion
 

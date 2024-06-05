@@ -9,13 +9,10 @@ using System.Threading.Tasks;
 namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.CartUpdateIngradientCommand
 {
     /// <summary>
-    /// Cart add command
+    /// CartUpdateIngradientCommand command
     /// </summary>
-    /// <param name="cartDto">CartDTO</param>
     public class CartUpdateIngradientCommand : IRequest<CartUpdateIngradientCommandResponse>
     {
-        /// <summary>User Id</summary>
-        public string? UserId { get; set; }
         /// <summary>User Id</summary>
         public string? CartId { get; set; }
         /// <summary>Recipe</summary>

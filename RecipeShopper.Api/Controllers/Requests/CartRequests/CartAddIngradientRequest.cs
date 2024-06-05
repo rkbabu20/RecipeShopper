@@ -11,7 +11,7 @@
         public string? CartId { get; set;}
         /// <summary>Recipe id</summary>
         public string? RecipeId { get; set;}
-        /// <summary>User id</summary>
+        /// <summary>Cart Ingradient</summary>
         public CartIngradientRequest? Ingradient { get; set; }
     }
 }

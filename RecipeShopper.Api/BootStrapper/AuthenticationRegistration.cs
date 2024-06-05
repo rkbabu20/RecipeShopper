@@ -31,13 +31,14 @@ namespace RecipeShopper.DBContexts.Registrations
                     .AddSignInManager()
                     .AddRoles<IdentityRole>();
 
-                // Add JWT
+                // Add Authentication Schemes
                 services.AddAuthentication(options =>
                 {
                     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                }).AddJwtBearer(options =>
+                }).AddJwtBearer(options => 
                 {
+                    // JWT Token validations - Configurations 
                     options.TokenValidationParameters = new TokenValidationParameters()
                     {
                         ValidateIssuer = true,

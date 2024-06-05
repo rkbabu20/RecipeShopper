@@ -12,7 +12,7 @@ using RecipeShopper.DBContexts.DatabaseContext;
 namespace RecipeShopper.DBContexts.Migrations
 {
     [DbContext(typeof(RecipeShopperDbContext))]
-    [Migration("20240603035813_initial")]
+    [Migration("20240605085315_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -167,21 +167,23 @@ namespace RecipeShopper.DBContexts.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsOrderComplete")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("OrderId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CartId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("OrderId")
+                        .IsUnique()
+                        .HasFilter("[OrderId] IS NOT NULL");
 
                     b.ToTable("Cart");
                 });
@@ -238,12 +240,15 @@ namespace RecipeShopper.DBContexts.Migrations
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("OrderStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("OrderId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -266,14 +271,9 @@ namespace RecipeShopper.DBContexts.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("OrderId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("RecipeId");
 
                     b.HasIndex("CartId");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("Recipes");
                 });
@@ -437,11 +437,9 @@ namespace RecipeShopper.DBContexts.Migrations
 
             modelBuilder.Entity("RecipeShopper.Domain.Entities.Cart", b =>
                 {
-                    b.HasOne("RecipeShopper.Domain.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
+                    b.HasOne("RecipeShopper.Domain.Entities.Order", null)
+                        .WithOne("Cart")
+                        .HasForeignKey("RecipeShopper.Domain.Entities.Cart", "OrderId");
                 });
 
             modelBuilder.Entity("RecipeShopper.Domain.Entities.CartIngradient", b =>
@@ -451,24 +449,11 @@ namespace RecipeShopper.DBContexts.Migrations
                         .HasForeignKey("RecipeId");
                 });
 
-            modelBuilder.Entity("RecipeShopper.Domain.Entities.Order", b =>
-                {
-                    b.HasOne("RecipeShopper.Domain.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("RecipeShopper.Domain.Entities.Recipe", b =>
                 {
                     b.HasOne("RecipeShopper.Domain.Entities.Cart", null)
                         .WithMany("Recipes")
                         .HasForeignKey("CartId");
-
-                    b.HasOne("RecipeShopper.Domain.Entities.Order", null)
-                        .WithMany("Recipes")
-                        .HasForeignKey("OrderId");
                 });
 
             modelBuilder.Entity("RecipeShopper.Domain.Entities.Cart", b =>
@@ -478,7 +463,8 @@ namespace RecipeShopper.DBContexts.Migrations
 
             modelBuilder.Entity("RecipeShopper.Domain.Entities.Order", b =>
                 {
-                    b.Navigation("Recipes");
+                    b.Navigation("Cart")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("RecipeShopper.Domain.Entities.Recipe", b =>

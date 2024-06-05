@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace RecipeShopper.Application.Services.DTOs
 {
+    /// <summary>
+    /// View user dto
+    /// </summary>
     public class ViewUserDTO : BaseUserDTO
     {
     }

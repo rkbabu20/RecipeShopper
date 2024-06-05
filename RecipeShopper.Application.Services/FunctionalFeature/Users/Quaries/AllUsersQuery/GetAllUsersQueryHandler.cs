@@ -11,8 +11,8 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Quaries.All
     /// Get all users query handler
     /// </summary>
     public class GetAllUsersQueryHandler :
-        BaseHandler<GetAllUsersQuery, GetAllUsersResponse>,
-        IRequestHandler<GetAllUsersQuery, GetAllUsersResponse>
+        BaseHandler<GetAllUsersQuery, GetAllUsersQueryResponse>,
+        IRequestHandler<GetAllUsersQuery, GetAllUsersQueryResponse>
     {
         #region Private variables
         private readonly IRepositories _repositories = null;
@@ -27,9 +27,9 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Quaries.All
         #endregion
 
         #region Interface methods
-        public async Task<GetAllUsersResponse> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
+        public async Task<GetAllUsersQueryResponse> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
-            var response = new GetAllUsersResponse();
+            var response = new GetAllUsersQueryResponse();
             try
             {
                 // Step 1 : Validate
@@ -38,7 +38,7 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Quaries.All
                 {
                     // Step 2: Get all users
                     var usersAggregate = await _repositories.UsersRepository.GetAllAsync().ConfigureAwait(false);
-                    response = _mapper.Map<GetAllUsersResponse>(usersAggregate);
+                    response = _mapper.Map<GetAllUsersQueryResponse>(usersAggregate);
                     // Step 3 : Handle messages
                     if (response != null && response.Users!.Any())
                         HandleMessage(response!, "Users retrieved successfully.");
@@ -50,7 +50,7 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Quaries.All
             return response!;
         }
 
-        protected async override Task Validate(GetAllUsersQuery request, GetAllUsersResponse response)
+        protected async override Task Validate(GetAllUsersQuery request, GetAllUsersQueryResponse response)
         {
             if (request == null) { base.HandleMessage(response, "Request cannot be null", Enums.MessageTypeEnum.ValidationError); }
         }

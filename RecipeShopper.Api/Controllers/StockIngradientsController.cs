@@ -20,7 +20,7 @@ namespace RecipeShopper.Api.Controllers
     /// </summary>
     /// <param name="mediator">IMediator</param>
     /// <param name="mapper">IMapper</param>
-    [Authorize]
+   [Authorize]
     public class StockIngradientsController(IMediator mediator, IMapper mapper) : BaseController
     {
         #region private variables

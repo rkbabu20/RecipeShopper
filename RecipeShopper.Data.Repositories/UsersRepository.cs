@@ -88,7 +88,7 @@ namespace RecipeShopper.Data.Repositories
 
         public async Task UpdateAsync(UsersAggregate request)
         {
-            /*
+
             var userAggregate = await GetAsync(new GenericRequest() { Id = request.User!.Id }).ConfigureAwait(false);
             if (userAggregate != null && userAggregate.User != null)
             {
@@ -97,7 +97,7 @@ namespace RecipeShopper.Data.Repositories
                 userAggregate.User.FirstName = request.User.FirstName;
                 request.IsUpdated = _dbContext.SaveChanges() > 0;
             }
-            */
+
         }
         public async Task<UsersAggregate> GetUserByEmailAsync(string email)
         {

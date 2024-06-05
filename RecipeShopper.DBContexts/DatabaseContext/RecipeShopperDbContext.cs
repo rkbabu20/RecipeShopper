@@ -30,6 +30,9 @@ namespace RecipeShopper.DBContexts.DatabaseContext
         {
             base.OnModelCreating(builder);
             builder.Entity<User>(entity => { entity.ToTable(name: "AspNetUsers"); });
+
+            //builder.Entity<User>
+
         }
 
         #region Properties

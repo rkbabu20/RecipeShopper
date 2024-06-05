@@ -12,6 +12,7 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Login.Quaries.Log
     /// </summary>
     public class LoginQueryResponse : BaseResponse
     {
+        /// <summary>Token</summary>
         public string Token { get; set; }
     }
 }

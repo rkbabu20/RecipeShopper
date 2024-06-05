@@ -14,6 +14,11 @@ using System.Threading.Tasks;
 
 namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.CartDeleteCommand
 { 
+    /// <summary>
+    /// Cart delete command handler
+    /// </summary>
+    /// <param name="repositories"></param>
+    /// <param name="mapper"></param>
     public class CartDeleteCommandHandler(IRepositories repositories, IMapper mapper) :
         BaseHandler<CartDeleteCommand, CartDeleteCommandResponse>,
         IRequestHandler<CartDeleteCommand, CartDeleteCommandResponse>
@@ -22,6 +27,13 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.Car
         private readonly IRepositories _repositories = repositories;
         private readonly IMapper _mapper = mapper;
         #endregion
+
+        /// <summary>
+        /// Cart delete handler logic
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<CartDeleteCommandResponse> Handle(CartDeleteCommand request, CancellationToken cancellationToken)
         {
             var response = new CartDeleteCommandResponse();
@@ -38,10 +50,15 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.Car
             return response;
         }
 
+        /// <summary>
+        /// Validate input
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="response"></param>
+        /// <returns></returns>
         protected async override Task Validate(CartDeleteCommand request, CartDeleteCommandResponse response)
         {
             if (request == null) { base.HandleMessage(response, "Request cannot be null", Enums.MessageTypeEnum.ValidationError); }
-            else if (string.IsNullOrEmpty(request.UserId)) { base.HandleMessage(response, "Provide valid user identifier.", Enums.MessageTypeEnum.ValidationError); }
             else if (!Guid.TryParse(request.CartId, out _)) { base.HandleMessage(response, "Provide valid cart identifier.", Enums.MessageTypeEnum.ValidationError); }
         }
     }

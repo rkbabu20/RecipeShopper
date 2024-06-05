@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace RecipeShopper.Application.Services.FunctionalFeature.Orders.Commands.SubmitOrderCommand
 {
+    /// <summary>
+    /// Submit order response
+    /// </summary>
     public class SubmitOrderCommandResponse : BaseResponse
     {
-    }
+    }// End SubmitOrderCommandResponse
 }

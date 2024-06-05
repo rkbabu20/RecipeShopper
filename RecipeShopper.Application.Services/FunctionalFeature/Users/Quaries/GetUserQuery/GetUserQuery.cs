@@ -10,8 +10,11 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Quaries.Get
     /// <summary>
     /// Get all users query
     /// </summary>
-    public class GetUserQuery(string userId) : IRequest<GetUserResponse>
+    public class GetUserQuery(string userId) : IRequest<GetUserQueryResponse>
     {
+        /// <summary>
+        /// user id
+        /// </summary>
         public string Id { get; set; } = userId;
     }
 }

@@ -12,8 +12,14 @@ using System.Threading.Tasks;
 
 namespace RecipeShopper.Application.Services.MapperProfiles
 {
+    /// <summary>
+    /// Generic request profile mapping
+    /// </summary>
     internal class GenericRequestProfileMapping : Profile
     {
+        /// <summary>
+        /// Map profiles
+        /// </summary>
         public GenericRequestProfileMapping()
         {
             // DeleteUser command

@@ -15,6 +15,11 @@ using RecipeShopper.Domain.Aggregates.OrdersAggrigate;
 
 namespace RecipeShopper.Application.Services.FunctionalFeature.Orders.Quaries.GetAllOrdersQuery
 {
+    /// <summary>
+    /// Get all orders query handler
+    /// </summary>
+    /// <param name="repositories">IRepositories</param>
+    /// <param name="mapper">IMapper</param>
     public class GetAllOrdersQueryHandler(IRepositories repositories, IMapper mapper) :
         BaseHandler<GetAllOrdersQuery, GetAllOrdersQueryResponse>,
         IRequestHandler<GetAllOrdersQuery, GetAllOrdersQueryResponse>
@@ -50,6 +55,12 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Orders.Quaries.Ge
             return response;
         }// Handle
 
+        /// <summary>
+        /// Validate inut
+        /// </summary>
+        /// <param name="request">GetAllOrdersQuery</param>
+        /// <param name="response">GetAllOrdersQueryResponse</param>
+        /// <returns></returns>
         protected async override Task Validate(GetAllOrdersQuery request, GetAllOrdersQueryResponse response)
         {
             if (request == null) { base.HandleMessage(response, "Request cannot be null", Enums.MessageTypeEnum.ValidationError); }

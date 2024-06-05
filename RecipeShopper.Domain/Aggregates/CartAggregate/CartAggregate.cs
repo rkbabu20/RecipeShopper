@@ -18,10 +18,11 @@ namespace RecipeShopper.Domain.Aggregates.CartAggregate
         public CartAggregate(CartIngradient cartIngradient) { CartIngradient = cartIngradient; }
         public CartAggregate(Recipe recipe) { Recipe = recipe; }
         #endregion
-
+        /// <summary>Cart</summary>
         public Cart Cart { get; set; }
+        /// <summary>Cart Ingradient</summary>
         public CartIngradient CartIngradient { get; set; }
+        /// <summary>Recipe</summary>
         public Recipe Recipe { get; set; }
-        public bool IsCartExists { get; set; }
     }
 }

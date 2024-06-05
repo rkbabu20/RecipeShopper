@@ -15,6 +15,6 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Orders.Quaries.Ge
     public class GetAllOrdersQuery(string userId) : IRequest<GetAllOrdersQueryResponse>
     {
         /// <summary>User Id</summary>
-        public string UserId { get; set; }
+        public string UserId { get; set; } = userId;
     }
 }

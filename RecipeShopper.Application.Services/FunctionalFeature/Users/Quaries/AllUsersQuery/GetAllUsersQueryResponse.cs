@@ -8,9 +8,18 @@ using System.Threading.Tasks;
 
 namespace RecipeShopper.Application.Services.FunctionalFeature.Users.Quaries.AllUsersQuery
 {
-    public class GetAllUsersResponse : BaseResponse
+    /// <summary>
+    /// Response for GetAllUsersQuery
+    /// </summary>
+    public class GetAllUsersQueryResponse : BaseResponse
     {
-        public GetAllUsersResponse() { }
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public GetAllUsersQueryResponse() => Users = new List<ViewUserDTO>();
+
+        #region public properties
         public List<ViewUserDTO>? Users { get; set; }
+        #endregion
     }
 }

@@ -12,7 +12,5 @@ namespace RecipeShopper.Application.Services.DTOs
     /// </summary>
     public class UserDTO : BaseUserDTO
     {
-        /// <summary>Login password</summary>
-        public string? Password { get; set; }
     }
 }

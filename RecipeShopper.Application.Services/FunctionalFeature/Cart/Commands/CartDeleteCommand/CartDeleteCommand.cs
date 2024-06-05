@@ -8,15 +8,14 @@ using System.Threading.Tasks;
 
 namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.CartDeleteCommand
 {
+
     /// <summary>
-    /// Cart add command
+    /// Cart delete command
     /// </summary>
-    /// <param name="cartDto">CartDTO</param>
-    public class CartDeleteCommand : IRequest<CartDeleteCommandResponse>
+    /// <param name="cartId"></param>
+    public class CartDeleteCommand(string cartId) : IRequest<CartDeleteCommandResponse>
     {
-        /// <summary>User Id</summary>
-        public string UserId { get; set; }
-        /// <summary>User Id</summary>
-        public string CartId { get; set; }
+        /// <summary>Cart Id</summary>
+        public string CartId { get; set; } = cartId;
     }
 }
