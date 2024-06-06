@@ -5,8 +5,6 @@
     /// </summary>
     public class CartAddIngradientRequest
     {
-        /// <summary>User id</summary>
-        public string? UserId { get; set; }
         /// <summary>Cart id</summary>
         public string? CartId { get; set;}
         /// <summary>Recipe id</summary>

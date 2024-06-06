@@ -75,7 +75,6 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.Car
             if (request == null) { base.HandleMessage(response, "Request cannot be null", Enums.MessageTypeEnum.ValidationError); }
             else if (request.Ingradient == null) { base.HandleMessage(response, "Cartingradient cannot be null", Enums.MessageTypeEnum.ValidationError); }
             else if (request.Ingradient.StockIngradientId == Guid.Empty) { base.HandleMessage(response, "Cartingradient should have valid StockIngradientId", Enums.MessageTypeEnum.ValidationError); }
-            else if (string.IsNullOrEmpty(request.UserId)) { base.HandleMessage(response, "Provide valid user identifier.", Enums.MessageTypeEnum.ValidationError); }
             else if (!Guid.TryParse(request.CartId, out _)) { base.HandleMessage(response, "Provide valid cart identifier.", Enums.MessageTypeEnum.ValidationError); }
             else if (!Guid.TryParse(request.RecipeId, out _)) { base.HandleMessage(response, "Provide valid Recipe identifier.", Enums.MessageTypeEnum.ValidationError); }
         }

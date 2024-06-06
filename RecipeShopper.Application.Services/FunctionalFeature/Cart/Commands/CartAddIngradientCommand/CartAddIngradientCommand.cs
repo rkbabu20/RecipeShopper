@@ -14,8 +14,6 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.Car
     /// <param name="cartDto">CartDTO</param>
     public class CartAddIngradientCommand : IRequest<CartAddIngradientCommandResponse>
     {
-        /// <summary>User Id</summary>
-        public string? UserId { get; set; }
         /// <summary>Cart Id</summary>
         public string? CartId { get; set; }
         /// <summary>Recipe Id</summary>

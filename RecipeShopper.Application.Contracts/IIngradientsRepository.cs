@@ -20,6 +20,13 @@ namespace RecipeShopper.Application.Contracts
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        Task Patch(StockIngradientsAggrigate request);
+        Task PatchAsync(StockIngradientsAggrigate request);
+
+        /// <summary>
+        /// Stock ingradient bulk add
+        /// </summary>
+        /// <param name="request">StockIngradientsAggrigate</param>
+        /// <returns></returns>
+        Task BulkAddAsync(StockIngradientsAggrigate request);
     }
 }
