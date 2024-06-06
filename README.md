@@ -36,7 +36,7 @@ Download the latest docker image for ms sql server 2019
 3. Run below command to download the docker image.
     docker pull mcr.microsoft.com/mssql/server:2019-latest
 4. Run following command in docket to run the sql server [Sql server 2019 will be up and running in your docker]
-    docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=KeltonExercise@123" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2019-latest
+    docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD={ProvideYourOwnPasswordHere}" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2019-latest
 5. Open the solution in visual studio 2022
 6. Under RecipeShopper.Api update Connection Strings at appsettings.json file to point to your local sql server 2019.
 7. Then go to package manager console (Visual Studio -> Tools -> Nuget Package Manager -> Package Manager Console ) run below command
