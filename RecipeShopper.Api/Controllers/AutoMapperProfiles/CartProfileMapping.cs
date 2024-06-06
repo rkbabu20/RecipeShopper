@@ -32,32 +32,26 @@ namespace RecipeShopper.Api.Controllers.AutoMapperProfiles
             #endregion
 
             #region Cart Recipe Add Request
-            CreateMap<CartAddRecipeRequest, CartAddRecipeCommand>()
-              .ReverseMap();
+            CreateMap<CartAddRecipeRequest, CartAddRecipeCommand>().ReverseMap();
             #endregion
 
             #region Cart Recipe update Request
-            CreateMap<CartUpdateRecipeRequest, CartUpdateRecipeCommand>()
-              .ReverseMap();
+            CreateMap<CartUpdateRecipeRequest, CartUpdateRecipeCommand>().ReverseMap();
             #endregion
 
             #region Cart Recipe Delete Request
-            CreateMap<CartDeleteRecipeRequest, CartDeleteRecipeCommand>()
-              .ReverseMap();
+            CreateMap<CartDeleteRecipeRequest, CartDeleteRecipeCommand>().ReverseMap();
             #endregion
 
             #region CartIngradientAddRequest
-            CreateMap<CartAddIngradientRequest, CartAddIngradientCommand>()
-              .ReverseMap();
+            CreateMap<CartAddIngradientRequest, CartAddIngradientCommand>().ReverseMap();
             #endregion
 
             #region CartIngradientDeleteRequest
-            CreateMap<CartDeleteIngradientRequest, CartDeleteIngradientCommand>()
-              .ReverseMap();
+            CreateMap<CartDeleteIngradientRequest, CartDeleteIngradientCommand>().ReverseMap();
             #endregion
             #region CartIngradientUpdaeRequest
-            CreateMap<CartUpdateIngradientRequest, CartUpdateIngradientCommand>()
-              .ReverseMap();
+            CreateMap<CartUpdateIngradientRequest, CartUpdateIngradientCommand>().ReverseMap();
             #endregion
             
             #region Common mappings

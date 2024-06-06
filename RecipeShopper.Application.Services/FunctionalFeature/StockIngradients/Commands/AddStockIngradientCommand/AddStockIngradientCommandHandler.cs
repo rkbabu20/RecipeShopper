@@ -44,6 +44,7 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.
                 {
                     // Step 2 : Add StockIngradient
                     var aggregate = new StockIngradientsAggrigate(_mapper.Map<StockIngradient>(request.StockIngradient));
+                    aggregate.StockIngradient?.ApplyDateProperties(true, false);
                     await _repositories.StockIngradientRepository.AddAsync(aggregate).ConfigureAwait(false);
 
                     // Step 3 : Check if StockIngradient really added
@@ -56,10 +57,16 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.
             return response;
         }
 
+        /// <summary>
+        /// Validate input
+        /// </summary>
+        /// <param name="request">AddStockIngradientCommand</param>
+        /// <param name="response">AddStockIngradientCommandResponse</param>
+        /// <returns></returns>
         protected async override Task Validate(AddStockIngradientCommand request, AddStockIngradientCommandResponse response)
         {
             if (request == null) { base.HandleMessage(response, "Request cannot be null", Enums.MessageTypeEnum.ValidationError); }
-            else if (request.StockIngradient == null) { base.HandleMessage(response, "StockIngradient cannot be be null.", Enums.MessageTypeEnum.ValidationError); }
+            else if (request.StockIngradient == null) { base.HandleMessage(response, "StockIngradient cannot be null.", Enums.MessageTypeEnum.ValidationError); }
             else
             {
                 var existingStockIngradient = await _repositories.StockIngradientRepository.GetByNameAsync(request.StockIngradient.Name);

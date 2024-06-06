@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace RecipeShopper.DBContexts.DatabaseContext
 {
     /// <summary>
-    /// Recipe shopper data base context 
+    /// Recipe shopper database context 
     /// </summary>
     public class RecipeShopperDbContext : IdentityDbContext<User>
     {
@@ -30,9 +30,6 @@ namespace RecipeShopper.DBContexts.DatabaseContext
         {
             base.OnModelCreating(builder);
             builder.Entity<User>(entity => { entity.ToTable(name: "AspNetUsers"); });
-
-            //builder.Entity<User>
-
         }
 
         #region Properties

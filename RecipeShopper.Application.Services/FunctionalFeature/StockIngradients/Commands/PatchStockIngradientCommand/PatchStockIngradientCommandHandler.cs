@@ -6,11 +6,6 @@ using RecipeShopper.Application.Services.Extensions;
 using RecipeShopper.Domain.Aggregates;
 using RecipeShopper.Domain.Aggregates.IngradientsAggregate;
 using RecipeShopper.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.Commands.PatchStockIngradientCommand
 {
@@ -52,7 +47,7 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.
                 {
                     var aggregate = new StockIngradientsAggrigate(_mapper.Map<StockIngradient>(request));
                     // Step 2:  Update stock ingradient to db
-                    await _repositories.StockIngradientRepository.Patch(aggregate);
+                    await _repositories.StockIngradientRepository.PatchAsync(aggregate);
 
                     // Step 4: Add response messages for succes or failure
                     if (aggregate != null && aggregate.IsPatched)

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using RecipeShopper.Api.Controllers.Requests.StockIngradientsRequests;
 using RecipeShopper.Application.Services.DTOs;
+using RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.Commands.BulkAddStockIngradientCommand;
 using RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.Commands.PatchStockIngradientCommand;
 
 namespace RecipeShopper.Api.Controllers.AutoMapperProfiles
@@ -15,6 +16,7 @@ namespace RecipeShopper.Api.Controllers.AutoMapperProfiles
         /// </summary>
         public StockIngradientProfileMapping()
         {
+            CreateMap<BulkAddStockIngradientCommand, BulkStockIngradientAddRequest>().ReverseMap();
             CreateMap<StockIngradientAddRequest, StockIngradientDTO>();
             CreateMap<StockIngradientUpdateRequest, StockIngradientDTO>();
             CreateMap<StockIngradientPatchRequest, PatchStockIngradientCommand>();

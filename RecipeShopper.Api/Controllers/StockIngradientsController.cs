@@ -6,6 +6,7 @@ using RecipeShopper.Api.Controllers.Base;
 using RecipeShopper.Api.Controllers.Requests.StockIngradientsRequests;
 using RecipeShopper.Application.Services.DTOs;
 using RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.Commands.AddStockIngradientCommand;
+using RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.Commands.BulkAddStockIngradientCommand;
 using RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.Commands.DeleteStockIngradientCommand;
 using RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.Commands.PatchStockIngradientCommand;
 using RecipeShopper.Application.Services.FunctionalFeature.StockIngradients.Commands.UpdateStockIngradientCommand;
@@ -20,7 +21,7 @@ namespace RecipeShopper.Api.Controllers
     /// </summary>
     /// <param name="mediator">IMediator</param>
     /// <param name="mapper">IMapper</param>
-   [Authorize]
+    [Authorize]
     public class StockIngradientsController(IMediator mediator, IMapper mapper) : BaseController
     {
         #region private variables
@@ -47,7 +48,7 @@ namespace RecipeShopper.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("{ingradientId}")]
-        public async Task<IActionResult> Get([FromRoute]string ingradientId)
+        public async Task<IActionResult> Get([FromRoute] string ingradientId)
         {
             Guid ingradientIdGuid = Guid.Empty;
             if (!Guid.TryParse(ingradientId, out ingradientIdGuid))
@@ -90,6 +91,21 @@ namespace RecipeShopper.Api.Controllers
             var stockIngradient = _mapper.Map<StockIngradientDTO>(request);
             stockIngradient.StockIngradientId = Guid.NewGuid();
             var result = await _mediator.Send(new AddStockIngradientCommand(stockIngradient));
+            return GetObjectResult(result);
+        }
+
+        /// <summary>
+        /// Add ingradient
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost("bulkAdd")]
+        public async Task<IActionResult> BulkAdd([FromBody] BulkStockIngradientAddRequest request)
+        {
+            // Add user
+            var stockIngradientsCommand = _mapper.Map<BulkAddStockIngradientCommand>(request);
+            stockIngradientsCommand.StockIngradients.ForEach(sIng => sIng.StockIngradientId = Guid.NewGuid());
+            var result = await _mediator.Send(stockIngradientsCommand);
             return GetObjectResult(result);
         }
 

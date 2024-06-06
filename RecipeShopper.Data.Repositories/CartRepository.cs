@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RecipeShopper.Application.Contracts;
+using RecipeShopper.Data.Repositories.Extensions;
 using RecipeShopper.DBContexts.DatabaseContext;
 using RecipeShopper.Domain.Aggregates;
 using RecipeShopper.Domain.Aggregates.CartAggregate;
@@ -33,18 +34,19 @@ namespace RecipeShopper.Data.Repositories
             if (request != null)
             {
                 // Step 1 : Get existing cart and check there is no
-                var existingCart = await GetAsync(new GenericRequest() { Id = request.Cart.UserId }).ConfigureAwait(false);
-                if (existingCart == null|| (existingCart!=null && existingCart.Cart==null))
+                var existingCartAggregate = await GetAsync(new GenericRequest() { Id = request.Cart.UserId }).ConfigureAwait(false);
+                if (existingCartAggregate == null|| (existingCartAggregate != null && existingCartAggregate.Cart==null))
                 {
                     // Step 2 : Total price
                     request.Cart.TotalPrice = request.Cart.GetTotalPrice();
-                    AddCart(request.Cart);
-                    // Step 4 :  Save changes
+                    request.Cart.Add(_dbContext);
+                    _dbContext.Cart.Add(request.Cart);
+                    // Step 3 :  Save changes
                     request.IsAdded = _dbContext.SaveChanges(true) > 0;
                 }
                 else
                 {
-                    request.ValidationErrors.Add("Thee is an existing cart hence new cart cannot be added.");
+                    request.ValidationErrors.Add("There is an existing cart hence new cart cannot be added.");
                 }
             }
         }
@@ -61,7 +63,7 @@ namespace RecipeShopper.Data.Repositories
                 var existingCart = await GetAsync(request).ConfigureAwait(false);
                 if (existingCart != null && existingCart.Cart != null)
                 {
-                    RemoveCart(existingCart.Cart);
+                    existingCart.Cart.Remove(_dbContext);
                     _dbContext.SaveChanges();
                 }
             }
@@ -137,9 +139,9 @@ namespace RecipeShopper.Data.Repositories
                 var cart = _dbContext.Cart.Include(x=>x.Recipes).ThenInclude(x=>x.Ingradients).FirstOrDefault(p => p.CartId == cartId);
                 if (cart != null)
                 {
-                    // Add cart ingradient
+                    // Add recipe to cart
                     cart.Recipes?.Add(request.Recipe);
-                    AddRecipe(request.Recipe);
+                    
                     cart.TotalPrice = cart.GetTotalPrice();
                     // Save DB Changes
                     request.IsAdded = _dbContext.SaveChanges() > 0;
@@ -250,71 +252,26 @@ namespace RecipeShopper.Data.Repositories
             if (cart != null)
             {
                 // Step 2 : Fetch recipe
-                var recipe = cart.Recipes?.FirstOrDefault(x => x.RecipeId == recipeId);
+                var recipe = _dbContext.Recipes?.FirstOrDefault(x => x.RecipeId == recipeId);
                 if (recipe != null)
                 {
                     //Step 3 : Fetch Ingradient
                     var cartIngradient = recipe.Ingradients?.FirstOrDefault(x => x.CartIngradientId == cartIngradientId);
                     if (cartIngradient != null)
                     {
-                        //Step 4: Remove ingradient 
-                        recipe.Ingradients?.Remove(cartIngradient);
-
-                        // Step 5 : Update total price
-                        cart.TotalPrice = cart.GetTotalPrice();
-                        request.IsDeleted = _dbContext.SaveChanges() > 0;
+                        //Step 4: Remove ingradient from Recipe 
+                        recipe.Ingradients.Remove(cartIngradient);
+                        _dbContext.SaveChanges();
+                        var cartIngradient1 = _dbContext.CartIngradients.FirstOrDefault(x => x.CartIngradientId == cartIngradientId);
+                        if (cartIngradient1 != null)
+                        {
+                            cartIngradient1.Remove(_dbContext);
+                            cart.TotalPrice = cart.GetTotalPrice();
+                            request.IsDeleted = _dbContext.SaveChanges() > 0;
+                        }
                     }
                 }
             }
-        }
-        #endregion
-        #region Cascading logic to add Cart
-        private void AddCart(Cart cart)
-        {
-            if(cart !=null)
-            {
-                foreach(var recipe in cart.Recipes)
-                    AddRecipe(recipe);
-                _dbContext.Cart.Add(cart);
-            }
-        }
-        private void AddRecipe(Recipe recipe)
-        {
-            if(recipe != null)
-            {
-                foreach (var ingradient in recipe.Ingradients)
-                    AddCartIngradient(ingradient);
-                _dbContext.Recipes.Add(recipe);
-            }
-        }
-        private void AddCartIngradient(CartIngradient cartIngradient)
-        {
-            _dbContext.CartIngradients.Add(cartIngradient);
-        }
-        #endregion
-
-        #region Cascading logic to remove cart and its childs
-        private void RemoveCart(Cart cart)
-        {
-            if (cart != null)
-            {
-                foreach (var recipe in cart.Recipes)
-                    RemoveRecipe(recipe);
-                _dbContext.Cart.Remove(cart);
-            }
-        }
-        private void RemoveRecipe(Recipe recipe)
-        {
-            if (recipe != null)
-            {
-                foreach (var ingradient in recipe.Ingradients)
-                    RemoveCartIngradient(ingradient);
-                _dbContext.Recipes.Remove(recipe);
-            }
-        }
-        private void RemoveCartIngradient(CartIngradient cartIngradient)
-        {
-            _dbContext.CartIngradients.Remove(cartIngradient);
         }
         #endregion
     }

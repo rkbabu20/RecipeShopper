@@ -24,7 +24,7 @@ namespace RecipeShopper.Api.Controllers
     /// </summary>
     /// <param name="mediator"></param>
     /// <param name="mapper"></param>
-   [Authorize]
+   //[Authorize]
     public class CartController(IMediator mediator, IMapper mapper) : BaseController
     {
         #region private variables

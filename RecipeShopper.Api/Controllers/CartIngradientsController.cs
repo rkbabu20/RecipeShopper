@@ -6,6 +6,8 @@ using RecipeShopper.Api.Controllers.Base;
 using RecipeShopper.Api.Controllers.Requests.CartRequests;
 using RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.CartAddCommand;
 using RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.CartAddIngradientCommand;
+using RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.CartDeleteCommand;
+using RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.CartDeleteIngradientCommand;
 using RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.CartUpdateIngradientCommand;
 
 namespace RecipeShopper.Api.Controllers
@@ -15,7 +17,7 @@ namespace RecipeShopper.Api.Controllers
     /// </summary>
     /// <param name="mediator"></param>
     /// <param name="mapper"></param>
-    [Authorize]
+    //[Authorize]
     public class CartIngradientsController(IMediator mediator, IMapper mapper) : BaseController
     {
         #region private variables
@@ -60,11 +62,11 @@ namespace RecipeShopper.Api.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpDelete("delete")]
-        [ProducesResponseType(typeof(CartAddCommandResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(CartDeleteIngradientCommandResponse), StatusCodes.Status200OK)]
         public async Task<IActionResult> DeleteIngradient([FromBody] CartDeleteIngradientRequest request)
         {
             // Add ingradients to cart
-            var cartDeleteIngradientCommand = _mapper.Map<CartAddIngradientCommand>(request);
+            var cartDeleteIngradientCommand = _mapper.Map<CartDeleteIngradientCommand>(request);
             var result = await _mediator.Send(cartDeleteIngradientCommand).ConfigureAwait(false);
             return GetObjectResult(result);
         }

@@ -46,10 +46,10 @@ namespace RecipeShopper.Application.Services.FunctionalFeature.Cart.Commands.Car
                     var cartAggregate = new CartAggregate(new CartIngradient());
                     await _repositories.CartRepository.DeleteIngradientFromCartRecipe(cartId, recipeId,ingradientId, cartAggregate).ConfigureAwait(false);
                     // Step 3 : Validate status and updae response with status and messages
-                    if (cartAggregate.IsAdded)
-                        base.HandleMessage(response, $"Recipe added to cart successfully.");
+                    if (cartAggregate.IsDeleted)
+                        base.HandleMessage(response, $"Ingrdient deleted from cart successfully.");
                     else
-                        base.HandleMessage(response, $"Recipe add to cart failed.", Enums.MessageTypeEnum.ApplicationError);
+                        base.HandleMessage(response, $"Ingrdient failed to delete from cart.", Enums.MessageTypeEnum.ApplicationError);
                 }
             }
             catch (Exception ex) { HandleException(response, ex); }
